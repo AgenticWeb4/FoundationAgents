@@ -1,0 +1,300 @@
+// Flutter App Expert .cursorrules
+
+// Flexibility Notice
+// Note: This is a recommended project structure, but be flexible and adapt to existing project structures.
+// Do not enforce these structural patterns if the project follows a different organization.
+// Focus on maintaining consistency with the existing project architecture while applying Flutter best practices.
+
+// ============================================================================
+// ARCHITECTURE MAPPING: FROM REQUIREMENTS TO ARCHITECTURE ELEMENTS
+// ============================================================================
+
+// Requirements to Architecture Mapping
+const requirementsToArchitectureMapping = {
+  // User Story → Business Use Case → Architecture Layer
+  "userStory": {
+    "pattern": "As a [role], I want [feature] so that [benefit]",
+    "mapping": {
+      "role": "→ User Entity/Repository",
+      "feature": "→ Domain Use Case + Presentation Feature",
+      "benefit": "→ Business Value + Success Criteria"
+    }
+  },
+  
+  // Business Scenario → Domain Aggregates
+  "businessScenario": {
+    "pattern": "Given [context], When [action], Then [outcome]",
+    "mapping": {
+      "context": "→ Domain Entity + State",
+      "action": "→ Use Case + BLoC Event",
+      "outcome": "→ BLoC State + UI Update"
+    }
+  },
+  
+  // Domain Events → State Management
+  "domainEvents": {
+    "pattern": "Event triggers State change",
+    "mapping": {
+      "event": "→ BLoC Event + Use Case Input",
+      "processing": "→ Use Case + Repository",
+      "state": "→ BLoC State + UI State"
+    }
+  }
+};
+
+// Architecture Element Relationships
+const architectureElementRelations = {
+  "presentation": {
+    "dependencies": ["domain"],
+    "components": ["pages", "widgets", "bloc"],
+    "responsibilities": ["UI rendering", "User interaction", "State display"]
+  },
+  "domain": {
+    "dependencies": ["core"],
+    "components": ["entities", "usecases", "repositories"],
+    "responsibilities": ["Business logic", "Domain rules", "Use case orchestration"]
+  },
+  "data": {
+    "dependencies": ["domain", "core"],
+    "components": ["models", "datasources", "repository_impl"],
+    "responsibilities": ["Data persistence", "External API", "Data transformation"]
+  },
+  "core": {
+    "dependencies": [],
+    "components": ["constants", "theme", "utils", "widgets", "di"],
+    "responsibilities": ["Shared utilities", "Dependency injection", "Common widgets"]
+  }
+};
+
+// ============================================================================
+// FLUTTER BEST PRACTICES
+// ============================================================================
+
+const flutterBestPractices = [
+    "Adapt to existing project architecture while maintaining clean code principles",
+    "Use Flutter 3.x features and Material 3 design",
+    "Implement clean architecture with BLoC pattern",
+    "Follow proper state management principles",
+    "Use proper dependency injection",
+    "Implement proper error handling",
+    "Follow platform-specific design guidelines",
+    "Use proper localization techniques",
+];
+
+// ============================================================================
+// PROJECT STRUCTURE (Current Architecture)
+// ============================================================================
+
+const projectStructure = `
+lib/
+  core/                           # Shared utilities and infrastructure
+    constants/                    # App-wide constants
+    theme/                        # App theme and styling
+    utils/                        # Common utilities
+    widgets/                      # Reusable widgets
+    di/                          # Dependency injection
+  features/                      # Feature-based modules
+    feature_name/                # Each feature is self-contained
+      data/                      # Data layer (implements domain interfaces)
+        datasources/             # Data sources (API, Local DB)
+        models/                  # Data models (DTOs)
+        repositories/            # Repository implementations
+      domain/                    # Domain layer (business logic)
+        entities/                # Domain entities
+        repositories/            # Repository interfaces
+        usecases/               # Business use cases
+      presentation/              # Presentation layer (UI)
+        bloc/                    # BLoC state management
+        pages/                   # Page containers
+        widgets/                 # Feature-specific widgets
+  l10n/                         # Localization
+  main.dart                     # App entry point
+`;
+
+// ============================================================================
+// REQUIREMENT TO CODE MAPPING PATTERNS
+// ============================================================================
+
+const requirementToCodeMapping = {
+  // Feature Requirements → Code Structure
+  "feature": {
+    "requirement": "User can manage profile information",
+    "mapping": {
+      "domain": {
+        "entities": ["UserProfile", "UserPreferences"],
+        "usecases": ["GetUserProfile", "UpdateUserProfile", "ValidateProfile"],
+        "repositories": ["UserProfileRepository"]
+      },
+      "data": {
+        "models": ["UserProfileModel", "UserPreferencesModel"],
+        "datasources": ["UserProfileDataSource", "LocalStorageDataSource"],
+        "repositories": ["UserProfileRepositoryImpl"]
+      },
+      "presentation": {
+        "bloc": ["UserProfileBloc"],
+        "pages": ["UserProfilePage"],
+        "widgets": ["ProfileForm", "ProfileDisplay"]
+      }
+    }
+  },
+  
+  // Business Rules → Domain Logic
+  "businessRules": {
+    "requirement": "Email must be valid format",
+    "mapping": {
+      "domain": {
+        "entities": "Email validation in UserProfile entity",
+        "usecases": "ValidateProfile use case",
+        "repositories": "Validation logic in repository"
+      },
+      "presentation": {
+        "bloc": "Form validation in BLoC",
+        "widgets": "Error display in form widgets"
+      }
+    }
+  },
+  
+  // User Interactions → BLoC Events
+  "userInteractions": {
+    "requirement": "User clicks save button",
+    "mapping": {
+      "presentation": {
+        "widgets": "Save button with onPressed callback",
+        "bloc": "SaveProfileEvent → UpdateProfileUseCase"
+      },
+      "domain": {
+        "usecases": "UpdateProfileUseCase execution",
+        "entities": "UserProfile state update"
+      },
+      "data": {
+        "repositories": "Repository.save() call",
+        "datasources": "API call or local storage"
+      }
+    }
+  }
+};
+
+// ============================================================================
+// CODING GUIDELINES
+// ============================================================================
+
+const codingGuidelines = `
+1. Use proper null safety practices
+2. Implement proper error handling with Either type
+3. Follow proper naming conventions
+4. Use proper widget composition
+5. Implement proper routing using GoRouter
+6. Use proper form validation
+7. Follow proper state management with BLoC
+8. Implement proper dependency injection using GetIt
+9. Use proper asset management
+10. Follow proper testing practices
+11. Maintain clean architecture boundaries
+12. Use proper separation of concerns
+13. Implement proper error boundaries
+14. Follow proper state immutability
+15. Use proper async/await patterns
+`;
+
+// ============================================================================
+// BLoC PATTERN GUIDELINES
+// ============================================================================
+
+const blocPatternGuidelines = `
+1. Events should represent user actions or system events
+2. States should be immutable and represent UI state
+3. BLoCs should handle business logic orchestration
+4. Use proper event filtering and debouncing
+5. Implement proper error handling in BLoCs
+6. Keep BLoCs focused on single responsibility
+7. Use proper state management patterns
+8. Implement proper loading and error states
+9. Use proper state persistence when needed
+10. Follow proper BLoC lifecycle management
+`;
+
+// ============================================================================
+// WIDGET GUIDELINES
+// ============================================================================
+
+const widgetGuidelines = `
+1. Keep widgets small and focused
+2. Use const constructors when possible
+3. Implement proper widget keys
+4. Follow proper layout principles
+5. Use proper widget lifecycle methods
+6. Implement proper error boundaries
+7. Use proper performance optimization techniques
+8. Follow proper accessibility guidelines
+9. Separate business logic from UI logic
+10. Use proper widget composition patterns
+`;
+
+// ============================================================================
+// PERFORMANCE GUIDELINES
+// ============================================================================
+
+const performanceGuidelines = `
+1. Use proper image caching
+2. Implement proper list view optimization
+3. Use proper build methods optimization
+4. Follow proper state management patterns
+5. Implement proper memory management
+6. Use proper platform channels when needed
+7. Follow proper compilation optimization techniques
+8. Use proper lazy loading for features
+9. Implement proper widget rebuilding optimization
+10. Use proper const constructors
+`;
+
+// ============================================================================
+// TESTING GUIDELINES
+// ============================================================================
+
+const testingGuidelines = `
+1. Write unit tests for business logic
+2. Implement widget tests for UI components
+3. Use integration tests for feature testing
+4. Implement proper mocking strategies
+5. Use proper test coverage tools
+6. Follow proper test naming conventions
+7. Implement proper CI/CD testing
+8. Test BLoC state transitions
+9. Test use case business logic
+10. Test repository data operations
+`;
+
+// ============================================================================
+// DEPENDENCY INJECTION GUIDELINES
+// ============================================================================
+
+const dependencyInjectionGuidelines = `
+1. Use GetIt for service locator pattern
+2. Register dependencies in proper order
+3. Use proper singleton vs factory patterns
+4. Implement proper lazy loading
+5. Use proper scoped dependencies
+6. Follow proper dependency registration
+7. Implement proper dependency cleanup
+8. Use proper async dependency initialization
+9. Follow proper circular dependency prevention
+10. Implement proper dependency validation
+`;
+
+// ============================================================================
+// ERROR HANDLING GUIDELINES
+// ============================================================================
+
+const errorHandlingGuidelines = `
+1. Use Either type for error handling
+2. Implement proper error boundaries
+3. Handle network errors gracefully
+4. Implement proper user feedback
+5. Use proper error logging
+6. Handle validation errors properly
+7. Implement proper retry mechanisms
+8. Use proper error recovery strategies
+9. Follow proper error propagation
+10. Implement proper error reporting
+`;
+
