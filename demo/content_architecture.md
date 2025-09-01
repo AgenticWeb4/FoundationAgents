@@ -444,3 +444,280 @@
 - **成就系统**：激励用户持续学习
 
 这个内容信息架构文档为逻辑单词学习应用提供了完整的设计框架，涵盖了从教育价值到技术实现的所有核心要素，为项目的成功实施奠定了坚实基础。
+
+---
+
+## 📋 JSON数据结构设计
+
+### 完整版JSON结构（推荐使用）
+
+```json
+{
+  "version": "3.0",
+  "metadata": {
+    "title": "逻辑单词学习应用",
+    "target_age": "elementary",
+    "language": "zh-CN",
+    "created_date": "2024-01-01",
+    "total_stories": 150,
+    "total_words": 1000,
+    "total_questions": 300,
+    "supported_interactions": [
+      "click_select", "drag_sort", "connect_match", "fill_blank"
+    ],
+    "supported_logic_types": [
+      "cause_effect", "time_sequence", "classification", "comparison",
+      "inference", "pattern_recognition", "spatial_relations", "conditional_logic"
+    ]
+  },
+  "stories": [
+    {
+      "id": "story_001",
+      "title": "桃园三结义",
+      "category": "traditional_culture",
+      "subcategory": "history_story",
+      "theme": "three_kingdoms",
+      "tags": ["友谊", "忠诚", "理想"],
+      "difficulty_level": 1,
+      "estimated_time": 300,
+      "learning_objectives": [
+        "理解友谊的重要性",
+        "学习历史人物故事",
+        "掌握相关英文单词"
+      ],
+      "content": {
+        "text": "In the peach garden, three brothers met for the first time. They shared the same dream and decided to become sworn brothers."
+      },
+      "words": [
+        {
+          "id": "word_001",
+          "word": "peach",
+          "pronunciation": "/piːtʃ/",
+          "chinese": "桃子",
+          "type": "noun",
+          "difficulty": 1,
+          "frequency": "high",
+          "example_sentence": "The peach is sweet and juicy.",
+          "etymology": "来自古英语peche",
+          "synonyms": ["fruit"],
+          "related_words": ["garden", "tree", "sweet"]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q_001",
+          "type": "cause_effect",
+          "difficulty": 1,
+          "interaction_type": "click_select",
+          "question": {
+            "text": "为什么三个人要结拜为兄弟？"
+          },
+          "options": [
+            {
+              "id": "opt_1",
+              "text": "因为他们想一起打天下"
+            },
+            {
+              "id": "opt_2",
+              "text": "因为他们都喜欢桃子"
+            },
+            {
+              "id": "opt_3",
+              "text": "因为他们住得很近"
+            },
+            {
+              "id": "opt_4",
+              "text": "因为他们年龄相同"
+            }
+          ],
+          "correct_answer": "opt_1",
+          "explanation": {
+            "text": "他们结拜是为了共同的目标和理想"
+          },
+          "related_words": ["word_001", "word_002"],
+          "learning_points": [
+            "理解友谊的深层含义",
+            "学习历史背景知识"
+          ],
+          "hints": [
+            "想想他们共同的理想是什么",
+            "结拜通常是为了什么目的"
+          ],
+          "feedback": {
+            "correct": "很好！你理解了友谊的真正含义",
+            "incorrect": "再想想，他们结拜是为了什么？"
+          }
+        },
+        {
+          "id": "q_002",
+          "type": "time_sequence",
+          "difficulty": 1,
+          "interaction_type": "drag_sort",
+          "question": {
+            "text": "请按正确顺序排列桃园三结义的过程："
+          },
+          "sequence_items": [
+            {
+              "id": "seq_1",
+              "text": "相遇"
+            },
+            {
+              "id": "seq_2",
+              "text": "结拜"
+            },
+            {
+              "id": "seq_3",
+              "text": "立誓"
+            },
+            {
+              "id": "seq_4",
+              "text": "成为兄弟"
+            }
+          ],
+          "correct_sequence": ["seq_1", "seq_2", "seq_3", "seq_4"],
+          "explanation": {
+            "text": "这是桃园三结义的完整过程"
+          },
+          "related_words": ["word_001", "word_002"]
+        },
+        {
+          "id": "q_003",
+          "type": "classification",
+          "difficulty": 1,
+          "interaction_type": "connect_match",
+          "question": {
+            "text": "请连接相关的概念："
+          },
+          "match_pairs": [
+            {
+              "left": "刘备",
+              "right": "仁德"
+            },
+            {
+              "left": "关羽",
+              "right": "忠义"
+            },
+            {
+              "left": "张飞",
+              "right": "勇猛"
+            }
+          ],
+          "correct_matches": [
+            {"left": "刘备", "right": "仁德"},
+            {"left": "关羽", "right": "忠义"},
+            {"left": "张飞", "right": "勇猛"}
+          ],
+          "explanation": {
+            "text": "每个人都有自己的性格特点"
+          }
+        },
+        {
+          "id": "q_004",
+          "type": "logical_connectors",
+          "difficulty": 1,
+          "interaction_type": "fill_blank",
+          "question": {
+            "text": "填空补全句子："
+          },
+          "sentence": "因为三个人有共同的理想，___ 他们决定结拜为兄弟。",
+          "blank_options": ["所以", "但是", "然而", "然后"],
+          "correct_answer": "所以",
+          "explanation": {
+            "text": "因为...所以...表示因果关系"
+          }
+        }
+      ]
+    }
+  ],
+  "interaction_types": {
+    "click_select": {
+      "name": "点击选择",
+      "description": "从多个选项中选择正确答案",
+      "usage_percentage": 60,
+      "suitable_for": ["所有逻辑类型"],
+      "ui_components": ["radio_buttons", "card_selection"],
+      "validation": "single_selection"
+    },
+    "drag_sort": {
+      "name": "拖拽排序",
+      "description": "拖拽元素到正确位置",
+      "usage_percentage": 25,
+      "suitable_for": ["time_sequence", "sequencing", "classification"],
+      "ui_components": ["draggable_items", "drop_zones"],
+      "validation": "sequence_order"
+    },
+    "connect_match": {
+      "name": "连线匹配",
+      "description": "连接相关概念",
+      "usage_percentage": 10,
+      "suitable_for": ["classification", "comparison", "analogical_reasoning"],
+      "ui_components": ["connection_lines", "match_pairs"],
+      "validation": "pair_matching"
+    },
+    "fill_blank": {
+      "name": "填空补全",
+      "description": "补充逻辑关系词",
+      "usage_percentage": 5,
+      "suitable_for": ["logical_connectors", "cause_effect", "conditional_logic"],
+      "ui_components": ["text_input", "dropdown_selection"],
+      "validation": "text_completion"
+    }
+  },
+  "logic_types": {
+    "cause_effect": {
+      "name": "因果关系",
+      "english_name": "Cause and Effect",
+      "description": "理解事件之间的因果关系",
+      "difficulty_levels": [1, 2, 3],
+      "learning_objectives": [
+        "识别原因和结果",
+        "理解因果关系链",
+        "预测可能的结果"
+      ],
+      "example_questions": [
+        "为什么...？",
+        "如果...那么...",
+        "导致...的原因是..."
+      ],
+      "suitable_interactions": ["click_select", "fill_blank"]
+    },
+    "time_sequence": {
+      "name": "时间顺序",
+      "english_name": "Time Sequence",
+      "description": "按时间顺序排列事件",
+      "difficulty_levels": [1, 2, 3],
+      "learning_objectives": [
+        "理解时间顺序",
+        "排列事件顺序",
+        "预测下一步"
+      ],
+      "example_questions": [
+        "请按正确顺序排列",
+        "接下来会发生什么？",
+        "之前发生了什么？"
+      ],
+      "suitable_interactions": ["drag_sort", "click_select"]
+    }
+  }
+}
+```
+
+### JSON结构设计说明
+
+#### 核心优化点
+1. **图片处理**：第一期不需要图片，减少开发复杂度
+2. **发音模块**：独立调用，不存储在JSON中
+3. **交互方式**：详细定义4种交互类型及其适用场景
+4. **数据结构**：完整支持故事、词汇、逻辑问题的结构化存储
+
+#### 主要特点
+- **功能完整**：支持所有核心功能需求
+- **结构清晰**：层次分明，易于理解和维护
+- **扩展性好**：可以逐步添加高级功能
+- **开发友好**：平衡了功能性和开发成本
+
+#### 适用场景
+- **正式产品开发**：满足完整功能需求
+- **内容管理**：支持教育内容的系统化管理
+- **学习跟踪**：支持用户学习进度和成绩统计
+- **个性化学习**：支持基于数据的智能推荐
