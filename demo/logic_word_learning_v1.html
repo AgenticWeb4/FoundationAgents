@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logic Word Learning Master - Three Kingdoms Edition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #87CEEB 0%, #98FB98 50%, #FFB6C1 100%);
+            min-height: 100vh;
+            color: #333;
+            font-weight: 600;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page {
+            display: none;
+            background: #FFFFFF;
+            border: 6px solid #FF6B6B;
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23DAA520" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23DAA520" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%23DAA520" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #FF6B6B;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #4ECDC4;
+            font-weight: 600;
+            margin-bottom: 20px;
+            background: #FFF9C4;
+            padding: 8px 15px;
+            border-radius: 15px;
+            border: 3px solid #FFD93D;
+        }
+
+        .chinese-hint {
+            font-size: 0.9rem;
+            color: #888;
+            font-style: italic;
+            margin-left: 8px;
+        }
+
+        .pronunciation {
+            font-size: 0.8rem;
+            color: #666;
+            font-family: 'Courier New', monospace;
+            margin-left: 4px;
+            background: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 15px;
+            background: #E0E0E0;
+            border-radius: 10px;
+            border: 3px solid #FF6B6B;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4ECDC4 0%, #44A08D 100%);
+            transition: width 0.5s ease;
+            border-radius: 7px;
+        }
+
+        .content {
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .story-scene {
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFE0B2 100%);
+            border: 4px solid #FFD93D;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .scene-title {
+            font-size: 1.8rem;
+            color: #FF6B6B;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .scene-description {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: #000000;
+            margin-bottom: 20px;
+            text-align: justify;
+            font-weight: 700;
+        }
+
+        .word-highlight {
+            background: #FFFF00;
+            padding: 4px 8px;
+            font-weight: 900;
+            color: #000000;
+            margin: 0 2px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid #000000;
+        }
+
+        .word-highlight:hover {
+            background: #FF0000;
+            color: #FFFFFF;
+        }
+
+        .word-tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .word-card {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .word-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-color: #8B0000;
+        }
+
+        .word-card.learned {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border-color: #28a745;
+        }
+
+        .word-english {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #8B0000;
+            margin-bottom: 5px;
+        }
+
+        .word-chinese {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .word-example {
+            font-size: 0.9rem;
+            color: #888;
+            font-style: italic;
+        }
+
+        .word-test {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .logic-example {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 15px;
+        }
+
+        .cause-box, .effect-box {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            border: 2px solid #8B0000;
+            border-radius: 10px;
+            padding: 15px 20px;
+            min-width: 150px;
+            text-align: center;
+        }
+
+        .cause-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-color: #1976d2;
+        }
+
+        .effect-box {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-color: #7b1fa2;
+        }
+
+        .arrow {
+            font-size: 2rem;
+            color: #8B0000;
+            font-weight: bold;
+        }
+
+        .sentence-builder {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            border: 2px solid #8B0000;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sentence-part {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .word-select {
+            background: #fff;
+            border: 2px solid #8B0000;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 1rem;
+            color: #8B0000;
+            min-width: 120px;
+            cursor: pointer;
+        }
+
+        .word-select:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+
+        .next-steps {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .version-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .version-card {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            border: 2px solid #8B0000;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .version-card h4 {
+            color: #8B0000;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .version-card p {
+            color: #666;
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .logic-question {
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFE0B2 100%);
+            border: 4px solid #FFD93D;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-title {
+            font-size: 1.8rem;
+            color: #FF6B6B;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            color: #000000;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+
+        .puzzle-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .puzzle-piece {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            border: 2px solid #DAA520;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            color: #8B0000;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .puzzle-piece:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(218, 165, 32, 0.3);
+        }
+
+        .puzzle-piece.selected {
+            background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .puzzle-piece.correct {
+            background: linear-gradient(135deg, #228B22 0%, #32CD32 100%);
+            color: white;
+        }
+
+        .puzzle-piece.wrong {
+            background: linear-gradient(135deg, #DC143C 0%, #FF0000 100%);
+            color: white;
+        }
+
+        .answer-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .answer-option {
+            background: #FFFFFF;
+            border: 4px solid #FF6B6B;
+            border-radius: 15px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #FF6B6B;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .answer-option:hover {
+            background: #FFE0B2;
+            border-color: #FF8C00;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .answer-option.selected {
+            background: #FF6B6B;
+            color: #FFFFFF;
+            border-color: #FF6B6B;
+            transform: scale(1.05);
+        }
+
+        .answer-option.correct {
+            background: #4ECDC4;
+            color: #FFFFFF;
+            border-color: #4ECDC4;
+            transform: scale(1.05);
+        }
+
+        .answer-option.wrong {
+            background: #FF6B6B;
+            color: #FFFFFF;
+            border-color: #FF6B6B;
+            transform: scale(0.95);
+        }
+
+        .feedback {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            display: none;
+        }
+
+        .feedback.correct {
+            background: rgba(34, 139, 34, 0.1);
+            color: #228B22;
+            border: 2px solid #228B22;
+        }
+
+        .feedback.wrong {
+            background: rgba(220, 20, 60, 0.1);
+            color: #DC143C;
+            border: 2px solid #DC143C;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            background: #FF6B6B;
+            color: #FFFFFF;
+            border: 4px solid #FF6B6B;
+            border-radius: 15px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            background: #FF8C00;
+            border-color: #FF8C00;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:disabled {
+            background: #CCCCCC;
+            color: #666666;
+            border-color: #CCCCCC;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-primary {
+            background: #4ECDC4;
+            color: #FFFFFF;
+            border-color: #4ECDC4;
+        }
+
+        .btn-primary:hover {
+            background: #44A08D;
+            border-color: #44A08D;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFE0B2 100%);
+            padding: 20px;
+            margin: 10px;
+            min-width: 120px;
+            border: 4px solid #FFD93D;
+            border-radius: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #FF6B6B;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: #4ECDC4;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .character {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: #DAA520;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #8B0000;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .character.top-right {
+            top: 20px;
+            right: 20px;
+        }
+
+        .character.bottom-left {
+            bottom: 20px;
+            left: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .page {
+                padding: 20px;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .puzzle-container {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+            
+            .answer-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 页面1: 欢迎页面 -->
+        <div class="page active" id="page1">
+            <div class="character top-right">故</div>
+            <div class="header">
+                <h1 class="title">Story Learning Mode</h1>
+                <p class="subtitle">Story → Word Puzzle → Logic Questions</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 20%"></div>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="story-scene">
+                    <h2 class="scene-title">Learning Strategy: Story First</h2>
+                    <p class="scene-description">
+                        This version uses a <span class="word-highlight">story</span><span class="chinese-hint">(故事)</span>-first learning approach:
+                        <br><strong>Step 1:</strong> Read an <span class="word-highlight">interesting</span><span class="chinese-hint">(有趣的)</span> story (Three Kingdoms, Journey to the West, or Chinese idioms)
+                        <br><strong>Step 2:</strong> Play <span class="word-highlight">word</span><span class="chinese-hint">(单词)</span> puzzles to learn English words
+                        <br><strong>Step 3:</strong> Answer <span class="word-highlight">logic</span><span class="chinese-hint">(逻辑)</span> questions to think deeper
+                        <br><br>Perfect for learners who love <span class="word-highlight">stories</span><span class="chinese-hint">(故事)</span> and puzzles!
+                    </p>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Story Types</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Questions per Page</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Learning Pages</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="navigation">
+                <div></div>
+                <button class="btn btn-primary" onclick="nextPage()">Start Story Adventure</button>
+            </div>
+        </div>
+
+        <!-- 页面2: 三国故事 -->
+        <div class="page" id="page2">
+            <div class="character bottom-left">刘</div>
+            <div class="header">
+                <h1 class="title">Three Kingdoms Story</h1>
+                <p class="subtitle">The Peach Garden Oath</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 40%"></div>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="story-scene">
+                    <h2 class="scene-title">The Story of Three Brothers</h2>
+                    <p class="scene-description">
+                        In the <span class="word-highlight" onclick="playPronunciation('peach')">peach</span><span class="chinese-hint">(桃子)</span> <span class="pronunciation">/piːtʃ/</span> <span class="word-highlight" onclick="playPronunciation('garden')">garden</span><span class="chinese-hint">(花园)</span> <span class="pronunciation">/ˈɡɑːrdən/</span>, three <span class="word-highlight" onclick="playPronunciation('brothers')">brothers</span><span class="chinese-hint">(兄弟)</span> <span class="pronunciation">/ˈbrʌðərz/</span> met for the first time.
+                        Liu Bei, Guan Yu, and Zhang Fei became <span class="word-highlight" onclick="playPronunciation('friends')">friends</span><span class="chinese-hint">(朋友)</span> <span class="pronunciation">/frendz/</span> and made a <span class="word-highlight" onclick="playPronunciation('promise')">promise</span><span class="chinese-hint">(承诺)</span> <span class="pronunciation">/ˈprɑːmɪs/</span>.
+                        They <span class="word-highlight" onclick="playPronunciation('swore')">swore</span><span class="chinese-hint">(发誓)</span> <span class="pronunciation">/swɔːr/</span> to <span class="word-highlight" onclick="playPronunciation('work')">work</span><span class="chinese-hint">(工作)</span> <span class="pronunciation">/wɜːrk/</span> <span class="word-highlight" onclick="playPronunciation('together')">together</span><span class="chinese-hint">(一起)</span> <span class="pronunciation">/təˈɡeðər/</span> to <span class="word-highlight" onclick="playPronunciation('save')">save</span><span class="chinese-hint">(拯救)</span> <span class="pronunciation">/seɪv/</span> the <span class="word-highlight" onclick="playPronunciation('world')">world</span><span class="chinese-hint">(世界)</span> <span class="pronunciation">/wɜːrld/</span>.
+                        This <span class="word-highlight" onclick="playPronunciation('decision')">decision</span><span class="chinese-hint">(决定)</span> <span class="pronunciation">/dɪˈsɪʒən/</span> <span class="word-highlight" onclick="playPronunciation('changed')">changed</span><span class="chinese-hint">(改变)</span> <span class="pronunciation">/tʃeɪndʒd/</span> their <span class="word-highlight" onclick="playPronunciation('lives')">lives</span><span class="chinese-hint">(生活)</span> <span class="pronunciation">/laɪvz/</span> and <span class="word-highlight" onclick="playPronunciation('history')">history</span><span class="chinese-hint">(历史)</span> <span class="pronunciation">/ˈhɪstəri/</span> forever.
+                    </p>
+                </div>
+                
+
+                
+                <div class="logic-question">
+                    <h3 class="question-title">Logic Question 1: Why and What Happens</h3>
+                    <p class="question-text">Why did the three brothers become friends?</p>
+                    <div class="answer-options">
+                        <div class="answer-option" onclick="selectAnswer(this, 'correct')">
+                            A. Because they wanted to save the world together
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'wrong')">
+                            B. Because they liked the same food
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'wrong')">
+                            C. Because they were from the same city
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'wrong')">
+                            D. Because they had the same name
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback2-logic1"></div>
+                </div>
+                
+                <div class="logic-question">
+                    <h3 class="question-title">Logic Question 2: Story Sequence</h3>
+                    <p class="question-text">What happened first in the story?</p>
+                    <div class="answer-options">
+                        <div class="answer-option" onclick="selectAnswer(this, 'correct')">
+                            A. They met in the peach garden
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'wrong')">
+                            B. They made a promise
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'wrong')">
+                            C. They saved the world
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'wrong')">
+                            D. They changed history
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback2-logic2"></div>
+                </div>
+            </div>
+            
+            <div class="navigation">
+                <button class="btn" onclick="prevPage()">Previous</button>
+                <button class="btn btn-primary" onclick="nextPage()" id="nextBtn2" disabled>Next Story</button>
+            </div>
+        </div>
+
+        <!-- 页面3: 西游记故事 -->
+        <div class="page" id="page3">
+            <div class="character top-right">孙</div>
+            <div class="header">
+                <h1 class="title">Journey to the West Story</h1>
+                <p class="subtitle">Monkey King's Adventure</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 60%"></div>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="story-scene">
+                    <h2 class="scene-title">The Story of Monkey King</h2>
+                    <p class="scene-description">
+                        The <span class="word-highlight" onclick="playPronunciation('monkey')">monkey</span><span class="chinese-hint">(猴子)</span> <span class="pronunciation">/ˈmʌŋki/</span> king was very <span class="word-highlight" onclick="playPronunciation('clever')">clever</span><span class="chinese-hint">(聪明的)</span> <span class="pronunciation">/ˈklevər/</span> and <span class="word-highlight" onclick="playPronunciation('strong')">strong</span><span class="chinese-hint">(强壮的)</span> <span class="pronunciation">/strɔːŋ/</span>.
+                        He could <span class="word-highlight" onclick="playPronunciation('fly')">fly</span><span class="chinese-hint">(飞)</span> <span class="pronunciation">/flaɪ/</span> through the <span class="word-highlight" onclick="playPronunciation('clouds')">clouds</span><span class="chinese-hint">(云)</span> <span class="pronunciation">/klaʊdz/</span> and <span class="word-highlight" onclick="playPronunciation('fight')">fight</span><span class="chinese-hint">(战斗)</span> <span class="pronunciation">/faɪt/</span> with <span class="word-highlight" onclick="playPronunciation('magic')">magic</span><span class="chinese-hint">(魔法)</span> <span class="pronunciation">/ˈmædʒɪk/</span>.
+                        One day, he met a <span class="word-highlight" onclick="playPronunciation('monk')">monk</span><span class="chinese-hint">(和尚)</span> <span class="pronunciation">/mʌŋk/</span> who needed <span class="word-highlight" onclick="playPronunciation('help')">help</span><span class="chinese-hint">(帮助)</span> <span class="pronunciation">/help/</span>.
+                        The monkey king decided to <span class="word-highlight" onclick="playPronunciation('protect')">protect</span><span class="chinese-hint">(保护)</span> <span class="pronunciation">/prəˈtekt/</span> the monk on a long <span class="word-highlight" onclick="playPronunciation('journey')">journey</span><span class="chinese-hint">(旅程)</span> <span class="pronunciation">/ˈdʒɜːrni/</span>.
+                    </p>
+                </div>
+                
+
+                
+                <div class="logic-question">
+                    <h3 class="question-title">Logic Question 1: Character Traits</h3>
+                    <p class="question-text">What made the monkey king special?</p>
+                    <div class="answer-options">
+                        <div class="answer-option" onclick="selectAnswer(this, 'correct')">
+                            A. He was clever and could use magic
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'wrong')">
+                            B. He was very tall and big
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'wrong')">
+                            C. He had many friends
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'wrong')">
+                            D. He liked to eat bananas
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback3-logic1"></div>
+                </div>
+                
+                <div class="logic-question">
+                    <h3 class="question-title">Logic Question 2: Story Purpose</h3>
+                    <p class="question-text">Why did the monkey king help the monk?</p>
+                    <div class="answer-options">
+                        <div class="answer-option" onclick="selectAnswer(this, 'correct')">
+                            A. Because the monk needed protection on a journey
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'wrong')">
+                            B. Because the monk gave him food
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'wrong')">
+                            C. Because the monk was his friend
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'wrong')">
+                            D. Because the monk was very strong
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback3-logic2"></div>
+                </div>
+            </div>
+            
+            <div class="navigation">
+                <button class="btn" onclick="prevPage()">Previous</button>
+                <button class="btn btn-primary" onclick="nextPage()" id="nextBtn3" disabled>Next Story</button>
+            </div>
+        </div>
+
+        <!-- 页面4: 成语故事 -->
+        <div class="page" id="page4">
+            <div class="character bottom-left">成</div>
+            <div class="header">
+                <h1 class="title">Chinese Idiom Story</h1>
+                <p class="subtitle">The Tortoise and the Hare</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 80%"></div>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="story-scene">
+                    <h2 class="scene-title">The Story of Slow and Steady</h2>
+                    <p class="scene-description">
+                        A <span class="word-highlight" onclick="playPronunciation('hare')">hare</span><span class="chinese-hint">(兔子)</span> <span class="pronunciation">/her/</span> and a <span class="word-highlight" onclick="playPronunciation('tortoise')">tortoise</span><span class="chinese-hint">(乌龟)</span> <span class="pronunciation">/ˈtɔːrtəs/</span> decided to have a <span class="word-highlight" onclick="playPronunciation('race')">race</span><span class="chinese-hint">(比赛)</span> <span class="pronunciation">/reɪs/</span>.
+                        The hare was very <span class="word-highlight" onclick="playPronunciation('fast')">fast</span><span class="chinese-hint">(快的)</span> <span class="pronunciation">/fæst/</span> and <span class="word-highlight" onclick="playPronunciation('confident')">confident</span><span class="chinese-hint">(自信的)</span> <span class="pronunciation">/ˈkɑːnfɪdənt/</span>.
+                        The tortoise was <span class="word-highlight" onclick="playPronunciation('slow')">slow</span><span class="chinese-hint">(慢的)</span> <span class="pronunciation">/sloʊ/</span> but <span class="word-highlight" onclick="playPronunciation('steady')">steady</span><span class="chinese-hint">(稳定的)</span> <span class="pronunciation">/ˈstedi/</span>.
+                        During the race, the hare took a <span class="word-highlight" onclick="playPronunciation('nap')">nap</span><span class="chinese-hint">(小睡)</span> <span class="pronunciation">/næp/</span> because he thought he would <span class="word-highlight" onclick="playPronunciation('win')">win</span><span class="chinese-hint">(赢)</span> <span class="pronunciation">/wɪn/</span> easily.
+                        But the tortoise kept <span class="word-highlight" onclick="playPronunciation('moving')">moving</span><span class="chinese-hint">(移动)</span> <span class="pronunciation">/ˈmuːvɪŋ/</span> and won the race!
+                    </p>
+                </div>
+                
+
+                
+                <div class="logic-question">
+                    <h3 class="question-title">Logic Question 1: Character Comparison</h3>
+                    <p class="question-text">What was the difference between the hare and the tortoise?</p>
+                    <div class="answer-options">
+                        <div class="answer-option" onclick="selectAnswer(this, 'correct')">
+                            A. The hare was fast but lazy, the tortoise was slow but steady
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'wrong')">
+                            B. The hare was small, the tortoise was big
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'wrong')">
+                            C. The hare was brown, the tortoise was green
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'wrong')">
+                            D. The hare was young, the tortoise was old
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback4-logic1"></div>
+                </div>
+                
+                <div class="logic-question">
+                    <h3 class="question-title">Logic Question 2: Story Lesson</h3>
+                    <p class="question-text">What lesson does this story teach us?</p>
+                    <div class="answer-options">
+                        <div class="answer-option" onclick="selectAnswer(this, 'correct')">
+                            A. Slow and steady wins the race
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'wrong')">
+                            B. Fast animals are always better
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'wrong')">
+                            C. Sleeping is important during races
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'wrong')">
+                            D. Tortoises are smarter than hares
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback4-logic2"></div>
+                </div>
+            </div>
+            
+            <div class="navigation">
+                <button class="btn" onclick="prevPage()">Previous</button>
+                <button class="btn btn-primary" onclick="nextPage()" id="nextBtn4" disabled>Next: Summary</button>
+            </div>
+        </div>
+
+        <!-- 页面5: 总结页面 -->
+        <div class="page" id="page5">
+            <div class="character top-right">总</div>
+            <div class="header">
+                <h1 class="title">Story Learning Complete!</h1>
+                <p class="subtitle">Congratulations on completing all three stories!</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="story-scene">
+                    <h2 class="scene-title">Learning Achievement Summary</h2>
+                    <p class="scene-description">
+                        You have successfully completed the <span class="word-highlight">story</span><span class="chinese-hint">(故事)</span>-first learning approach!
+                        <br><strong>Story 1:</strong> Three Kingdoms - The Peach Garden Oath (6 words + 2 logic questions)
+                        <br><strong>Story 2:</strong> Journey to the West - Monkey King's Adventure (6 words + 2 logic questions)
+                        <br><strong>Story 3:</strong> Chinese Idiom - The Tortoise and the Hare (6 words + 2 logic questions)
+                        <br><br>You learned <span class="word-highlight">18</span><span class="chinese-hint">(18)</span> English words and answered <span class="word-highlight">6</span><span class="chinese-hint">(6)</span> logic questions!
+                    </p>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="wordsLearned">18</div>
+                        <div class="stat-label">Words Learned</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="logicSkills">6</div>
+                        <div class="stat-label">Logic Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="storiesCompleted">3</div>
+                        <div class="stat-label">Stories Completed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="accuracy">100%</div>
+                        <div class="stat-label">Learning Complete</div>
+                    </div>
+                </div>
+                
+                <div class="logic-question">
+                    <h3 class="question-title">Learning Reflection: Story Learning</h3>
+                    <p class="question-text">What did you learn about the story-first learning method?</p>
+                    <div class="answer-options">
+                        <div class="answer-option" onclick="selectAnswer(this, 'correct')">
+                            A. Stories make learning more interesting (故事让学习更有趣)
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'correct')">
+                            B. Word puzzles help remember words better (单词拼图帮助更好地记住单词)
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'correct')">
+                            C. Logic questions help think deeper (逻辑问题帮助更深层思考)
+                        </div>
+                        <div class="answer-option" onclick="selectAnswer(this, 'correct')">
+                            D. This method is perfect for story lovers (这种方法对喜欢故事的人很完美)
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="next-steps">
+                    <h3 class="question-title">Ready for the Next Challenge?</h3>
+                    <p class="question-text">Now try the Adventure Explorer Mode (Version 2) to experience a completely different learning approach!</p>
+                    <div class="version-comparison">
+                        <div class="version-card">
+                            <h4>Version 1: Story Learning</h4>
+                            <p>Story → Word Puzzle → Logic Questions</p>
+                            <p>Perfect for story lovers</p>
+                        </div>
+                        <div class="version-card">
+                            <h4>Version 2: Adventure Explorer</h4>
+                            <p>Story Adventure → Secret Discovery → Word Collection</p>
+                            <p>Perfect for adventure lovers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="navigation">
+                <button class="btn" onclick="prevPage()">Previous</button>
+                <button class="btn btn-primary" onclick="restartLearning()">Try Version 2: Adventure Mode</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        let totalPages = 5;
+        let selectedPuzzles = [];
+        let correctAnswers = 0;
+        let totalQuestions = 0;
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                document.getElementById(`page${currentPage}`).classList.remove('active');
+                currentPage++;
+                document.getElementById(`page${currentPage}`).classList.add('active');
+                updateProgress();
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                document.getElementById(`page${currentPage}`).classList.remove('active');
+                currentPage--;
+                document.getElementById(`page${currentPage}`).classList.add('active');
+                updateProgress();
+            }
+        }
+
+        function updateProgress() {
+            const progress = (currentPage / totalPages) * 100;
+            document.querySelector('.progress-fill').style.width = progress + '%';
+        }
+
+        function selectAnswer(element, result) {
+            // 移除其他选项的选中状态
+            const options = element.parentElement.querySelectorAll('.answer-option');
+            options.forEach(option => {
+                option.classList.remove('selected', 'correct', 'wrong');
+            });
+
+            // 添加选中状态
+            element.classList.add('selected');
+            
+            // 显示结果
+            if (result === 'correct') {
+                element.classList.add('correct');
+                showFeedback(element.parentElement.nextElementSibling, '恭喜！回答正确！', 'correct');
+                correctAnswers++;
+            } else {
+                element.classList.add('wrong');
+                showFeedback(element.parentElement.nextElementSibling, '再想想看，答案不正确。', 'wrong');
+            }
+            
+            totalQuestions++;
+            
+            // 启用下一页按钮
+            const nextBtn = document.getElementById(`nextBtn${currentPage}`);
+            if (nextBtn) {
+                nextBtn.disabled = false;
+            }
+        }
+
+        function learnWord(element) {
+            // 切换学习状态
+            element.classList.toggle('learned');
+            
+            // 显示学习反馈
+            const word = element.querySelector('.word-english').textContent;
+            const chinese = element.querySelector('.word-chinese').textContent;
+            
+            if (element.classList.contains('learned')) {
+                element.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    element.style.transform = 'scale(1)';
+                }, 200);
+            }
+        }
+
+        function updateSentence() {
+            const selects = document.querySelectorAll('.word-select');
+            let allSelected = true;
+            
+            selects.forEach(select => {
+                if (select.value === '') {
+                    allSelected = false;
+                }
+            });
+            
+            if (allSelected) {
+                const feedback = document.getElementById('feedback4-sentence');
+                feedback.innerHTML = '<div class="feedback-correct">✓ 完美！你成功连接了单词和逻辑！</div>';
+                
+                // 启用下一页按钮
+                const nextBtn = document.getElementById('nextBtn4');
+                if (nextBtn) {
+                    nextBtn.disabled = false;
+                }
+            }
+        }
+
+        function selectPuzzle(element, order) {
+            // 检查是否已经选择过
+            if (element.classList.contains('selected')) {
+                element.classList.remove('selected');
+                selectedPuzzles = selectedPuzzles.filter(item => item !== order);
+            } else {
+                element.classList.add('selected');
+                selectedPuzzles.push(order);
+            }
+            
+            // 检查答案
+            if (selectedPuzzles.length === element.parentElement.children.length) {
+                checkPuzzleAnswer(element.parentElement);
+            }
+        }
+
+        function checkPuzzleAnswer(container) {
+            const pieces = container.children;
+            const expectedOrder = [1, 2, 3, 4, 5, 6]; // 根据页面调整
+            
+            let isCorrect = true;
+            for (let i = 0; i < selectedPuzzles.length; i++) {
+                if (selectedPuzzles[i] !== expectedOrder[i]) {
+                    isCorrect = false;
+                    break;
+                }
+            }
+            
+            // 显示结果
+            if (isCorrect) {
+                Array.from(pieces).forEach(piece => {
+                    piece.classList.add('correct');
+                });
+                showFeedback(container.nextElementSibling, '太棒了！拼图顺序正确！', 'correct');
+                correctAnswers++;
+            } else {
+                Array.from(pieces).forEach(piece => {
+                    if (piece.classList.contains('selected')) {
+                        piece.classList.add('wrong');
+                    }
+                });
+                showFeedback(container.nextElementSibling, '顺序不正确，请重新排列。', 'wrong');
+            }
+            
+            totalQuestions++;
+            
+            // 启用下一页按钮
+            const nextBtn = document.getElementById(`nextBtn${currentPage}`);
+            if (nextBtn) {
+                nextBtn.disabled = false;
+            }
+        }
+
+        function showFeedback(element, message, type) {
+            element.textContent = message;
+            element.className = `feedback ${type}`;
+            element.style.display = 'block';
+            
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 3000);
+        }
+
+        function restartLearning() {
+            currentPage = 1;
+            selectedPuzzles = [];
+            correctAnswers = 0;
+            totalQuestions = 0;
+            
+            // 重置所有页面状态
+            for (let i = 1; i <= totalPages; i++) {
+                const page = document.getElementById(`page${i}`);
+                if (i === 1) {
+                    page.classList.add('active');
+                } else {
+                    page.classList.remove('active');
+                }
+            }
+            
+            // 重置所有按钮状态
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.classList.remove('selected', 'correct', 'wrong');
+            });
+            
+            document.querySelectorAll('.puzzle-piece').forEach(piece => {
+                piece.classList.remove('selected', 'correct', 'wrong');
+            });
+            
+            document.querySelectorAll('.btn-primary').forEach(btn => {
+                btn.disabled = true;
+            });
+            
+            updateProgress();
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
