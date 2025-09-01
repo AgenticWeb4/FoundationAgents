@@ -1,0 +1,723 @@
+{
+  "version": "3.0",
+  "metadata": {
+    "title": "逻辑单词学习应用",
+    "target_age": "elementary",
+    "language": "zh-CN",
+    "created_date": "2024-01-01",
+    "total_stories": 3,
+    "total_words": 18,
+    "total_questions": 6,
+    "supported_interactions": [
+      "click_select", "drag_sort", "connect_match", "fill_blank"
+    ],
+    "supported_logic_types": [
+      "cause_effect", "time_sequence", "classification", "comparison",
+      "inference", "pattern_recognition"
+    ]
+  },
+  "stories": [
+    {
+      "id": "story_001",
+      "title": "桃园三结义",
+      "category": "traditional_culture",
+      "subcategory": "history_story",
+      "theme": "three_kingdoms",
+      "tags": ["友谊", "忠诚", "理想"],
+      "difficulty_level": 1,
+      "estimated_time": 300,
+      "learning_objectives": [
+        "理解友谊的重要性",
+        "学习历史人物故事",
+        "掌握相关英文单词"
+      ],
+      "content": {
+        "text": "In the peach garden, three brothers met for the first time. They shared the same dream and decided to become sworn brothers. Liu Bei, Guan Yu, and Zhang Fei became friends and made a promise. They swore to work together to save the world. This decision changed their lives and history forever."
+      },
+      "words": [
+        {
+          "id": "word_001",
+          "word": "peach",
+          "pronunciation": "/piːtʃ/",
+          "chinese": "桃子",
+          "type": "noun",
+          "difficulty": 1,
+          "frequency": "high",
+          "example_sentence": "The peach is sweet and juicy.",
+          "etymology": "来自古英语peche",
+          "synonyms": ["fruit"],
+          "related_words": ["garden", "tree", "sweet"]
+        },
+        {
+          "id": "word_002",
+          "word": "garden",
+          "pronunciation": "/ˈɡɑːrdən/",
+          "chinese": "花园",
+          "type": "noun",
+          "difficulty": 1,
+          "frequency": "medium",
+          "example_sentence": "The garden is full of beautiful flowers.",
+          "etymology": "来自古法语jardin",
+          "synonyms": ["yard"],
+          "related_words": ["flower", "tree", "plant"]
+        },
+        {
+          "id": "word_003",
+          "word": "brothers",
+          "pronunciation": "/ˈbrʌðərz/",
+          "chinese": "兄弟",
+          "type": "noun",
+          "difficulty": 1,
+          "frequency": "high",
+          "example_sentence": "The three brothers are very close.",
+          "etymology": "来自古英语broþor",
+          "synonyms": ["siblings"],
+          "related_words": ["family", "sister", "friend"]
+        },
+        {
+          "id": "word_004",
+          "word": "friends",
+          "pronunciation": "/frendz/",
+          "chinese": "朋友",
+          "type": "noun",
+          "difficulty": 1,
+          "frequency": "high",
+          "example_sentence": "Good friends help each other.",
+          "etymology": "来自古英语freond",
+          "synonyms": ["companions"],
+          "related_words": ["friendship", "brother", "help"]
+        },
+        {
+          "id": "word_005",
+          "word": "promise",
+          "pronunciation": "/ˈprɑːmɪs/",
+          "chinese": "承诺",
+          "type": "noun",
+          "difficulty": 1,
+          "frequency": "medium",
+          "example_sentence": "I made a promise to help you.",
+          "etymology": "来自拉丁语promissum",
+          "synonyms": ["pledge"],
+          "related_words": ["promise", "swear", "commitment"]
+        },
+        {
+          "id": "word_006",
+          "word": "swore",
+          "pronunciation": "/swɔːr/",
+          "chinese": "发誓",
+          "type": "verb",
+          "difficulty": 1,
+          "frequency": "medium",
+          "example_sentence": "They swore to be loyal friends.",
+          "etymology": "来自古英语swerian",
+          "synonyms": ["pledged"],
+          "related_words": ["promise", "oath", "vow"]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q_001",
+          "type": "cause_effect",
+          "difficulty": 1,
+          "interaction_type": "click_select",
+          "question": {
+            "text": "为什么三个人要结拜为兄弟？"
+          },
+          "options": [
+            {
+              "id": "opt_1",
+              "text": "因为他们想一起打天下"
+            },
+            {
+              "id": "opt_2",
+              "text": "因为他们都喜欢桃子"
+            },
+            {
+              "id": "opt_3",
+              "text": "因为他们住得很近"
+            },
+            {
+              "id": "opt_4",
+              "text": "因为他们年龄相同"
+            }
+          ],
+          "correct_answer": "opt_1",
+          "explanation": {
+            "text": "他们结拜是为了共同的目标和理想"
+          },
+          "related_words": ["word_001", "word_002"],
+          "learning_points": [
+            "理解友谊的深层含义",
+            "学习历史背景知识"
+          ],
+          "hints": [
+            "想想他们共同的理想是什么",
+            "结拜通常是为了什么目的"
+          ],
+          "feedback": {
+            "correct": "很好！你理解了友谊的真正含义",
+            "incorrect": "再想想，他们结拜是为了什么？"
+          }
+        },
+        {
+          "id": "q_002",
+          "type": "time_sequence",
+          "difficulty": 1,
+          "interaction_type": "click_select",
+          "question": {
+            "text": "故事中发生了什么？"
+          },
+          "options": [
+            {
+              "id": "opt_1",
+              "text": "他们先相遇，然后结拜"
+            },
+            {
+              "id": "opt_2",
+              "text": "他们先结拜，然后相遇"
+            },
+            {
+              "id": "opt_3",
+              "text": "他们同时相遇和结拜"
+            },
+            {
+              "id": "opt_4",
+              "text": "他们先拯救世界，然后结拜"
+            }
+          ],
+          "correct_answer": "opt_1",
+          "explanation": {
+            "text": "正确的顺序是：相遇 → 结拜 → 发誓 → 成为兄弟"
+          },
+          "related_words": ["word_003", "word_004"],
+          "learning_points": [
+            "理解时间顺序",
+            "学习故事结构"
+          ],
+          "hints": [
+            "想想故事的自然发展顺序",
+            "结拜需要先认识对方"
+          ],
+          "feedback": {
+            "correct": "正确！你理解了故事的时间顺序",
+            "incorrect": "再想想故事的发展顺序"
+          }
+        }
+      ]
+    },
+    {
+      "id": "story_002",
+      "title": "孙悟空大闹天宫",
+      "category": "traditional_culture",
+      "subcategory": "history_story",
+      "theme": "journey_to_west",
+      "tags": ["勇敢", "智慧", "冒险"],
+      "difficulty_level": 1,
+      "estimated_time": 300,
+      "learning_objectives": [
+        "理解勇敢和智慧的重要性",
+        "学习神话故事",
+        "掌握相关英文单词"
+      ],
+      "content": {
+        "text": "The monkey king was very clever and strong. He could fly through the clouds and fight with magic. One day, he met a monk who needed help. The monkey king decided to protect the monk on a long journey."
+      },
+      "words": [
+        {
+          "id": "word_007",
+          "word": "monkey",
+          "pronunciation": "/ˈmʌŋki/",
+          "chinese": "猴子",
+          "type": "noun",
+          "difficulty": 1,
+          "frequency": "high",
+          "example_sentence": "The monkey is very clever.",
+          "etymology": "来自古英语monke",
+          "synonyms": ["ape"],
+          "related_words": ["animal", "clever", "jump"]
+        },
+        {
+          "id": "word_008",
+          "word": "clever",
+          "pronunciation": "/ˈklevər/",
+          "chinese": "聪明的",
+          "type": "adjective",
+          "difficulty": 1,
+          "frequency": "high",
+          "example_sentence": "She is a clever student.",
+          "etymology": "来自古英语clæfer",
+          "synonyms": ["smart"],
+          "related_words": ["intelligent", "wise", "bright"]
+        },
+        {
+          "id": "word_009",
+          "word": "strong",
+          "pronunciation": "/strɔːŋ/",
+          "chinese": "强壮的",
+          "type": "adjective",
+          "difficulty": 1,
+          "frequency": "high",
+          "example_sentence": "He is very strong.",
+          "etymology": "来自古英语strang",
+          "synonyms": ["powerful"],
+          "related_words": ["power", "muscle", "force"]
+        },
+        {
+          "id": "word_010",
+          "word": "fly",
+          "pronunciation": "/flaɪ/",
+          "chinese": "飞",
+          "type": "verb",
+          "difficulty": 1,
+          "frequency": "high",
+          "example_sentence": "Birds can fly in the sky.",
+          "etymology": "来自古英语fleogan",
+          "synonyms": ["soar"],
+          "related_words": ["sky", "wing", "air"]
+        },
+        {
+          "id": "word_011",
+          "word": "clouds",
+          "pronunciation": "/klaʊdz/",
+          "chinese": "云",
+          "type": "noun",
+          "difficulty": 1,
+          "frequency": "medium",
+          "example_sentence": "White clouds float in the sky.",
+          "etymology": "来自古英语clud",
+          "synonyms": ["sky"],
+          "related_words": ["rain", "weather", "sky"]
+        },
+        {
+          "id": "word_012",
+          "word": "magic",
+          "pronunciation": "/ˈmædʒɪk/",
+          "chinese": "魔法",
+          "type": "noun",
+          "difficulty": 1,
+          "frequency": "medium",
+          "example_sentence": "The wizard used magic to help people.",
+          "etymology": "来自古法语magique",
+          "synonyms": ["spell"],
+          "related_words": ["wizard", "power", "mystery"]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q_003",
+          "type": "classification",
+          "difficulty": 1,
+          "interaction_type": "click_select",
+          "question": {
+            "text": "孙悟空有什么特殊能力？"
+          },
+          "options": [
+            {
+              "id": "opt_1",
+              "text": "他聪明、强壮，会飞和魔法"
+            },
+            {
+              "id": "opt_2",
+              "text": "他很高很大"
+            },
+            {
+              "id": "opt_3",
+              "text": "他有很多朋友"
+            },
+            {
+              "id": "opt_4",
+              "text": "他喜欢吃香蕉"
+            }
+          ],
+          "correct_answer": "opt_1",
+          "explanation": {
+            "text": "孙悟空的特点是聪明、强壮，并且拥有飞行和魔法的能力"
+          },
+          "related_words": ["word_007", "word_008", "word_009"],
+          "learning_points": [
+            "理解人物特征",
+            "学习能力描述"
+          ],
+          "hints": [
+            "想想故事中提到的孙悟空的能力",
+            "注意故事中的关键词"
+          ],
+          "feedback": {
+            "correct": "很好！你理解了孙悟空的能力",
+            "incorrect": "再仔细读读故事，看看孙悟空有什么能力"
+          }
+        },
+        {
+          "id": "q_004",
+          "type": "cause_effect",
+          "difficulty": 1,
+          "interaction_type": "click_select",
+          "question": {
+            "text": "为什么孙悟空要帮助和尚？"
+          },
+          "options": [
+            {
+              "id": "opt_1",
+              "text": "因为和尚需要保护"
+            },
+            {
+              "id": "opt_2",
+              "text": "因为和尚给了他食物"
+            },
+            {
+              "id": "opt_3",
+              "text": "因为和尚是他的朋友"
+            },
+            {
+              "id": "opt_4",
+              "text": "因为和尚很强壮"
+            }
+          ],
+          "correct_answer": "opt_1",
+          "explanation": {
+            "text": "孙悟空帮助和尚是因为和尚需要保护，这是善良和助人为乐的表现"
+          },
+          "related_words": ["word_010", "word_011", "word_012"],
+          "learning_points": [
+            "理解助人为乐",
+            "学习因果关系"
+          ],
+          "hints": [
+            "想想故事中和尚需要什么",
+            "孙悟空为什么要保护和尚"
+          ],
+          "feedback": {
+            "correct": "正确！你理解了助人为乐的道理",
+            "incorrect": "再想想，和尚最需要什么帮助"
+          }
+        }
+      ]
+    },
+    {
+      "id": "story_003",
+      "title": "龟兔赛跑",
+      "category": "traditional_culture",
+      "subcategory": "idiom_story",
+      "theme": "chinese_idioms",
+      "tags": ["坚持", "谦虚", "智慧"],
+      "difficulty_level": 1,
+      "estimated_time": 300,
+      "learning_objectives": [
+        "理解坚持的重要性",
+        "学习成语故事",
+        "掌握相关英文单词"
+      ],
+      "content": {
+        "text": "A hare and a tortoise decided to have a race. The hare was very fast and confident. The tortoise was slow but steady. During the race, the hare took a nap because he thought he would win easily. But the tortoise kept moving and won the race!"
+      },
+      "words": [
+        {
+          "id": "word_013",
+          "word": "hare",
+          "pronunciation": "/her/",
+          "chinese": "兔子",
+          "type": "noun",
+          "difficulty": 1,
+          "frequency": "medium",
+          "example_sentence": "The hare runs very fast.",
+          "etymology": "来自古英语hara",
+          "synonyms": ["rabbit"],
+          "related_words": ["animal", "fast", "jump"]
+        },
+        {
+          "id": "word_014",
+          "word": "tortoise",
+          "pronunciation": "/ˈtɔːrtəs/",
+          "chinese": "乌龟",
+          "type": "noun",
+          "difficulty": 1,
+          "frequency": "medium",
+          "example_sentence": "The tortoise walks slowly.",
+          "etymology": "来自拉丁语tortuca",
+          "synonyms": ["turtle"],
+          "related_words": ["animal", "slow", "shell"]
+        },
+        {
+          "id": "word_015",
+          "word": "race",
+          "pronunciation": "/reɪs/",
+          "chinese": "比赛",
+          "type": "noun",
+          "difficulty": 1,
+          "frequency": "high",
+          "example_sentence": "The race was very exciting.",
+          "etymology": "来自古挪威语ras",
+          "synonyms": ["competition"],
+          "related_words": ["run", "speed", "win"]
+        },
+        {
+          "id": "word_016",
+          "word": "fast",
+          "pronunciation": "/fæst/",
+          "chinese": "快的",
+          "type": "adjective",
+          "difficulty": 1,
+          "frequency": "high",
+          "example_sentence": "The car is very fast.",
+          "etymology": "来自古英语fæst",
+          "synonyms": ["quick"],
+          "related_words": ["speed", "quick", "rapid"]
+        },
+        {
+          "id": "word_017",
+          "word": "confident",
+          "pronunciation": "/ˈkɑːnfɪdənt/",
+          "chinese": "自信的",
+          "type": "adjective",
+          "difficulty": 1,
+          "frequency": "medium",
+          "example_sentence": "She is confident about the test.",
+          "etymology": "来自拉丁语confidens",
+          "synonyms": ["sure"],
+          "related_words": ["confidence", "believe", "trust"]
+        },
+        {
+          "id": "word_018",
+          "word": "steady",
+          "pronunciation": "/ˈstedi/",
+          "chinese": "稳定的",
+          "type": "adjective",
+          "difficulty": 1,
+          "frequency": "medium",
+          "example_sentence": "He walks at a steady pace.",
+          "etymology": "来自古英语stæðig",
+          "synonyms": ["constant"],
+          "related_words": ["stable", "consistent", "regular"]
+        }
+      ],
+      "questions": [
+        {
+          "id": "q_005",
+          "type": "comparison",
+          "difficulty": 1,
+          "interaction_type": "click_select",
+          "question": {
+            "text": "兔子和乌龟有什么不同？"
+          },
+          "options": [
+            {
+              "id": "opt_1",
+              "text": "兔子快但懒惰，乌龟慢但坚持"
+            },
+            {
+              "id": "opt_2",
+              "text": "兔子小，乌龟大"
+            },
+            {
+              "id": "opt_3",
+              "text": "兔子是棕色，乌龟是绿色"
+            },
+            {
+              "id": "opt_4",
+              "text": "兔子年轻，乌龟年老"
+            }
+          ],
+          "correct_answer": "opt_1",
+          "explanation": {
+            "text": "故事告诉我们，兔子和乌龟的主要区别在于速度和坚持性"
+          },
+          "related_words": ["word_013", "word_014", "word_016"],
+          "learning_points": [
+            "理解对比分析",
+            "学习性格特征"
+          ],
+          "hints": [
+            "想想故事中兔子和乌龟的表现",
+            "注意它们的行为特点"
+          ],
+          "feedback": {
+            "correct": "很好！你理解了故事中角色的对比",
+            "incorrect": "再想想，故事中兔子和乌龟的行为有什么不同"
+          }
+        },
+        {
+          "id": "q_006",
+          "type": "inference",
+          "difficulty": 1,
+          "interaction_type": "click_select",
+          "question": {
+            "text": "这个故事告诉我们什么道理？"
+          },
+          "options": [
+            {
+              "id": "opt_1",
+              "text": "慢而稳者胜"
+            },
+            {
+              "id": "opt_2",
+              "text": "快的动物总是更好"
+            },
+            {
+              "id": "opt_3",
+              "text": "比赛中睡觉很重要"
+            },
+            {
+              "id": "opt_4",
+              "text": "乌龟比兔子聪明"
+            }
+          ],
+          "correct_answer": "opt_1",
+          "explanation": {
+            "text": "这个故事告诉我们坚持和稳定的重要性，慢而稳者胜"
+          },
+          "related_words": ["word_015", "word_017", "word_018"],
+          "learning_points": [
+            "理解故事寓意",
+            "学习人生道理"
+          ],
+          "hints": [
+            "想想谁最终赢得了比赛",
+            "为什么乌龟能赢"
+          ],
+          "feedback": {
+            "correct": "正确！你理解了故事的道理",
+            "incorrect": "再想想，谁赢了比赛，为什么"
+          }
+        }
+      ]
+    }
+  ],
+  "interaction_types": {
+    "click_select": {
+      "name": "点击选择",
+      "description": "从多个选项中选择正确答案",
+      "usage_percentage": 60,
+      "suitable_for": ["所有逻辑类型"],
+      "ui_components": ["radio_buttons", "card_selection"],
+      "validation": "single_selection"
+    },
+    "drag_sort": {
+      "name": "拖拽排序",
+      "description": "拖拽元素到正确位置",
+      "usage_percentage": 25,
+      "suitable_for": ["time_sequence", "sequencing", "classification"],
+      "ui_components": ["draggable_items", "drop_zones"],
+      "validation": "sequence_order"
+    },
+    "connect_match": {
+      "name": "连线匹配",
+      "description": "连接相关概念",
+      "usage_percentage": 10,
+      "suitable_for": ["classification", "comparison", "analogical_reasoning"],
+      "ui_components": ["connection_lines", "match_pairs"],
+      "validation": "pair_matching"
+    },
+    "fill_blank": {
+      "name": "填空补全",
+      "description": "补充逻辑关系词",
+      "usage_percentage": 5,
+      "suitable_for": ["logical_connectors", "cause_effect", "conditional_logic"],
+      "ui_components": ["text_input", "dropdown_selection"],
+      "validation": "text_completion"
+    }
+  },
+  "logic_types": {
+    "cause_effect": {
+      "name": "因果关系",
+      "english_name": "Cause and Effect",
+      "description": "理解事件之间的因果关系",
+      "difficulty_levels": [1, 2, 3],
+      "learning_objectives": [
+        "识别原因和结果",
+        "理解因果关系链",
+        "预测可能的结果"
+      ],
+      "example_questions": [
+        "为什么...？",
+        "如果...那么...",
+        "导致...的原因是..."
+      ],
+      "suitable_interactions": ["click_select", "fill_blank"]
+    },
+    "time_sequence": {
+      "name": "时间顺序",
+      "english_name": "Time Sequence",
+      "description": "按时间顺序排列事件",
+      "difficulty_levels": [1, 2, 3],
+      "learning_objectives": [
+        "理解时间顺序",
+        "排列事件顺序",
+        "预测下一步"
+      ],
+      "example_questions": [
+        "请按正确顺序排列",
+        "接下来会发生什么？",
+        "之前发生了什么？"
+      ],
+      "suitable_interactions": ["drag_sort", "click_select"]
+    },
+    "classification": {
+      "name": "分类归纳",
+      "english_name": "Classification",
+      "description": "按类别分组和归纳",
+      "difficulty_levels": [1, 2, 3],
+      "learning_objectives": [
+        "识别共同特征",
+        "按类别分组",
+        "理解分类标准"
+      ],
+      "example_questions": [
+        "这些属于哪一类？",
+        "找出共同特征",
+        "按类别分组"
+      ],
+      "suitable_interactions": ["click_select", "connect_match"]
+    },
+    "comparison": {
+      "name": "对比分析",
+      "english_name": "Comparison",
+      "description": "比较和分析不同事物",
+      "difficulty_levels": [1, 2, 3],
+      "learning_objectives": [
+        "找出相同点和不同点",
+        "比较特征",
+        "分析优劣"
+      ],
+      "example_questions": [
+        "相同点和不同点",
+        "哪个更好？为什么？",
+        "比较两者的特点"
+      ],
+      "suitable_interactions": ["click_select", "connect_match"]
+    },
+    "inference": {
+      "name": "推理判断",
+      "english_name": "Inference",
+      "description": "根据信息进行推理",
+      "difficulty_levels": [1, 2, 3],
+      "learning_objectives": [
+        "根据信息推断",
+        "预测结果",
+        "得出结论"
+      ],
+      "example_questions": [
+        "根据信息推断",
+        "最可能的结果是...",
+        "从...可以得出..."
+      ],
+      "suitable_interactions": ["click_select", "fill_blank"]
+    },
+    "pattern_recognition": {
+      "name": "模式识别",
+      "english_name": "Pattern Recognition",
+      "description": "识别和预测模式",
+      "difficulty_levels": [1, 2, 3],
+      "learning_objectives": [
+        "找出规律",
+        "预测下一个",
+        "识别模式"
+      ],
+      "example_questions": [
+        "找出规律",
+        "预测下一个",
+        "识别模式"
+      ],
+      "suitable_interactions": ["click_select", "drag_sort"]
+    }
+  }
+}
