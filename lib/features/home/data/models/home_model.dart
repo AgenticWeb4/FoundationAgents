@@ -58,7 +58,7 @@ class HomeModel extends Equatable {
       id: id,
       title: title,
       message: message,
-      createdAt: createdAt,
+      createdAt: createdAt ?? DateTime.now(),
       isActive: isActive,
     );
   }

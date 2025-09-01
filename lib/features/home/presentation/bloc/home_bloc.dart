@@ -1,9 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:dartz/dartz.dart';
 import '../../domain/entities/home_entity.dart';
 import '../../domain/usecases/get_home_message.dart';
-import '../../../core/utils/error_handler.dart';
+import '../../../../core/utils/error_handler.dart';
 
 // Events
 abstract class HomeEvent extends Equatable {
@@ -93,11 +92,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         (homeEntity) => emit(HomeLoaded(homeEntity)),
       );
     } catch (e, stackTrace) {
-      final error = ErrorHandler.handleException(e, stackTrace);
-      emit(HomeError(error.fold(
-        (appError) => appError.message,
-        (value) => '未知错误',
-      )));
+      final errorResult = ErrorHandler.handleException(e, stackTrace);
+      errorResult.fold(
+        (appError) => emit(HomeError(appError.message)),
+        (value) => emit(HomeError('未知错误')),
+      );
     }
   }
   
@@ -116,11 +115,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         (homeEntity) => emit(HomeLoaded(homeEntity)),
       );
     } catch (e, stackTrace) {
-      final error = ErrorHandler.handleException(e, stackTrace);
-      emit(HomeError(error.fold(
-        (appError) => appError.message,
-        (value) => '未知错误',
-      )));
+      final errorResult = ErrorHandler.handleException(e, stackTrace);
+      errorResult.fold(
+        (appError) => emit(HomeError(appError.message)),
+        (value) => emit(HomeError('未知错误')),
+      );
     }
   }
   

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../domain/entities/home_entity.dart';
-import '../../../core/widgets/common_widgets.dart';
+import '../../../../core/widgets/common_widgets.dart';
 
 /// Home数据展示组件
 class HomeWidget extends StatelessWidget {
@@ -58,15 +58,13 @@ class HomeWidget extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                if (homeEntity.createdAt != null) ...[
-                  const SizedBox(height: 12),
-                  Text(
-                    '更新时间: ${_formatDateTime(homeEntity.createdAt!)}',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimaryContainer.withOpacity(0.7),
-                    ),
+                const SizedBox(height: 12),
+                Text(
+                  '更新时间: ${_formatDateTime(homeEntity.createdAt)}',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimaryContainer.withValues(alpha: 0.7),
                   ),
-                ],
+                ),
               ],
             ),
           ),

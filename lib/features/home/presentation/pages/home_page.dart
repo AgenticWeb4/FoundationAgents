@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/home_widget.dart';
-import '../../../core/widgets/common_widgets.dart';
+import '../../../../core/widgets/common_widgets.dart';
 
 /// Home页面
 class HomePage extends StatelessWidget {
@@ -81,11 +81,11 @@ class HomeView extends StatelessWidget {
         if (state is HomeInitial) {
           // 初始状态，加载数据
           context.read<HomeBloc>().add(const LoadHomeData());
-          return const CommonLoadingIndicator(message: '正在加载...');
+          return CommonLoadingIndicator(message: '正在加载...');
         }
         
         if (state is HomeLoading) {
-          return const CommonLoadingIndicator(message: '正在加载...');
+          return CommonLoadingIndicator(message: '正在加载...');
         }
         
         if (state is HomeLoaded) {
@@ -116,7 +116,7 @@ class HomeView extends StatelessWidget {
           );
         }
         
-        return const CommonErrorWidget(
+        return CommonErrorWidget(
           message: '未知状态',
         );
       },

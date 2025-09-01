@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import '../entities/home_entity.dart';
 import '../repositories/home_repository.dart';
-import '../../../core/utils/error_handler.dart';
+import '../../../../core/utils/error_handler.dart';
 
 /// 获取Home消息的用例参数
 class GetHomeMessageParams extends Equatable {

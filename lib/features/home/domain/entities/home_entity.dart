@@ -18,11 +18,11 @@ class HomeEntity extends Equatable {
   
   /// 创建默认的Home实体
   factory HomeEntity.defaultHome() {
-    return const HomeEntity(
+    return HomeEntity(
       id: 'default',
       title: '欢迎使用',
       message: 'Hello World! 这是一个基于Clean Architecture和BLoC模式的Flutter应用。',
-      createdAt: null,
+      createdAt: DateTime.now(),
       isActive: true,
     );
   }

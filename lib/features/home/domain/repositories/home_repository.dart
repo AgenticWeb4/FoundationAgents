@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '../entities/home_entity.dart';
-import '../../../core/utils/error_handler.dart';
+import '../../../../core/utils/error_handler.dart';
 
 /// Home功能的数据仓库接口
 abstract class HomeRepository {
