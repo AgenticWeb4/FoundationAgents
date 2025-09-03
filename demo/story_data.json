@@ -1,19 +1,120 @@
 {
   "version": "3.0",
   "metadata": {
-    "title": "逻辑单词学习应用",
+    "title": "会思考英语学习",
+    "subtitle": "故事·思维·英文·智慧四维融合学习系统",
     "target_age": "elementary",
     "language": "zh-CN",
-    "created_date": "2024-01-01",
-    "total_stories": 3,
-    "total_words": 18,
-    "total_questions": 6,
+    "created_date": "2025-01-01",
+    "total_stories": 5,
+    "total_words": 30,
+    "total_questions": 15,
+    "learning_dimensions": {
+      "story": {
+        "name": "故事维度",
+        "description": "通过故事、历史、成语、金句学习，培养文化素养和人文底蕴",
+        "elements": {
+          "经典故事": {
+            "description": "传统经典故事，如桃园三结义、孙悟空大闹天宫等",
+            "learning_goals": ["文化传承", "想象力培养", "故事理解"]
+          },
+          "历史事件": {
+            "description": "重要历史事件和人物，如三国历史、西游记背景等",
+            "learning_goals": ["历史认知", "文化背景", "时间观念"]
+          },
+          "成语典故": {
+            "description": "成语故事和典故，如龟兔赛跑、守株待兔等",
+            "learning_goals": ["语言积累", "智慧传承", "文化理解"]
+          },
+          "金句名言": {
+            "description": "经典名言警句，如\"三人行必有我师\"等",
+            "learning_goals": ["语言表达", "人生智慧", "价值观培养"]
+          }
+        }
+      },
+      "thinking": {
+        "name": "思维维度",
+        "description": "通过20+逻辑视角训练，提升批判性思维和推理能力",
+        "elements": {
+          "基础逻辑": {
+            "description": "基础逻辑思维训练",
+            "types": ["因果关系", "时间顺序", "分类归纳", "对比分析", "推理判断", "模式识别"],
+            "learning_goals": ["逻辑基础", "思维清晰", "分析能力"]
+          },
+          "高级思维": {
+            "description": "高级思维技能训练",
+            "types": ["批判性思维", "创造性思维", "系统性思维", "辩证思维", "元认知思维", "发散思维"],
+            "learning_goals": ["深度思考", "创新思维", "问题解决"]
+          },
+          "专业视角": {
+            "description": "专业领域的思维视角",
+            "types": ["科学思维", "数学思维", "艺术思维", "哲学思维", "经济思维", "社会思维"],
+            "learning_goals": ["专业素养", "跨领域思维", "综合能力"]
+          },
+          "应用思维": {
+            "description": "实际应用中的思维技能",
+            "types": ["决策思维", "沟通思维", "领导思维", "学习思维", "创新思维", "反思思维"],
+            "learning_goals": ["实践应用", "生活智慧", "职业发展"]
+          }
+        }
+      },
+      "learning": {
+        "name": "学习维度",
+        "description": "通过英文和智慧学习，掌握语言技能和人生智慧",
+        "elements": {
+          "英文学习": {
+            "description": "英语语言技能学习",
+            "components": {
+              "词汇掌握": {
+                "description": "核心词汇学习和运用",
+                "learning_goals": ["词汇量提升", "词汇运用", "语言表达"]
+              },
+              "语法理解": {
+                "description": "英语语法规则和句型",
+                "learning_goals": ["语法准确", "句型掌握", "语言规范"]
+              },
+              "语言运用": {
+                "description": "实际语言运用能力",
+                "learning_goals": ["口语表达", "书面表达", "交流能力"]
+              },
+              "文化交流": {
+                "description": "跨文化交流和理解",
+                "learning_goals": ["文化理解", "国际视野", "交流技巧"]
+              }
+            }
+          },
+          "智慧学习": {
+            "description": "人生智慧和品格培养",
+            "components": {
+              "人生哲理": {
+                "description": "从故事中提取人生智慧",
+                "learning_goals": ["人生感悟", "智慧积累", "品格提升"]
+              },
+              "价值观念": {
+                "description": "正确的价值观培养",
+                "learning_goals": ["价值判断", "道德选择", "品格塑造"]
+              },
+              "情感智慧": {
+                "description": "情感管理和人际智慧",
+                "learning_goals": ["情感管理", "人际交往", "情商提升"]
+              },
+              "成长智慧": {
+                "description": "个人成长和发展智慧",
+                "learning_goals": ["自我认知", "目标设定", "持续成长"]
+              }
+            }
+          }
+        }
+      }
+    },
     "supported_interactions": [
-      "click_select", "drag_sort", "connect_match", "fill_blank"
+      "click_select", "drag_sort", "connect_match", "fill_blank", 
+      "story_analysis", "wisdom_reflection", "creative_thinking"
     ],
     "supported_logic_types": [
       "cause_effect", "time_sequence", "classification", "comparison",
-      "inference", "pattern_recognition"
+      "inference", "pattern_recognition", "critical_thinking", "creative_thinking",
+      "moral_reasoning", "cultural_understanding"
     ]
   },
   "stories": [
@@ -26,11 +127,34 @@
       "tags": ["友谊", "忠诚", "理想"],
       "difficulty_level": 1,
       "estimated_time": 300,
-      "learning_objectives": [
-        "理解友谊的重要性",
-        "学习历史人物故事",
-        "掌握相关英文单词"
-      ],
+      "learning_objectives": {
+        "story": {
+          "经典故事": "理解桃园三结义的故事情节和人物关系",
+          "历史事件": "学习三国历史背景和刘备、关羽、张飞的历史地位",
+          "成语典故": "掌握'桃园结义'成语的含义和用法",
+          "金句名言": "学习'不求同年同月同日生，但求同年同月同日死'等经典誓言"
+        },
+        "thinking": {
+          "基础逻辑": "分析友谊形成的原因和条件（因果关系）",
+          "高级思维": "理解承诺和誓言的重要性（批判性思维）",
+          "专业视角": "从历史角度分析结义的意义（历史思维）",
+          "应用思维": "培养团队合作和互助精神（合作思维）"
+        },
+        "learning": {
+          "英文学习": {
+            "词汇掌握": "掌握peach, garden, brothers, friends, promise, swore等核心词汇",
+            "语法理解": "学习友谊相关的英语表达和句型",
+            "语言运用": "能够用英语描述友谊和承诺",
+            "文化交流": "理解中英文化中友谊表达的差异"
+          },
+          "智慧学习": {
+            "人生哲理": "理解友谊的珍贵和重要性",
+            "价值观念": "学习忠诚和信守承诺的品质",
+            "情感智慧": "培养团队合作和互助精神",
+            "成长智慧": "学会建立和维护真正的友谊"
+          }
+        }
+      },
       "content": {
         "text": "In the peach garden, three brothers met for the first time. They shared the same dream and decided to become sworn brothers. Liu Bei, Guan Yu, and Zhang Fei became friends and made a promise. They swore to work together to save the world. This decision changed their lives and history forever."
       },
@@ -202,6 +326,56 @@
             "correct": "正确！你理解了故事的时间顺序",
             "incorrect": "再想想故事的发展顺序"
           }
+        },
+        {
+          "id": "q_001_wisdom",
+          "type": "moral_reasoning",
+          "difficulty": 1,
+          "interaction_type": "wisdom_reflection",
+          "question": {
+            "text": "从桃园三结义的故事中，你学到了什么人生智慧？"
+          },
+          "options": [
+            {
+              "id": "opt_1",
+              "text": "真正的友谊建立在共同的理想和价值观上"
+            },
+            {
+              "id": "opt_2", 
+              "text": "朋友越多越好"
+            },
+            {
+              "id": "opt_3",
+              "text": "结拜兄弟比普通朋友更重要"
+            },
+            {
+              "id": "opt_4",
+              "text": "只有血缘关系才能成为真正的兄弟"
+            }
+          ],
+          "correct_answer": "opt_1",
+          "explanation": {
+            "text": "桃园三结义告诉我们，真正的友谊不是基于血缘或利益，而是基于共同的理想、价值观和相互的承诺"
+          },
+          "related_words": ["word_004", "word_005", "word_006"],
+          "learning_points": [
+            "理解友谊的真正含义",
+            "学习人生价值观",
+            "培养道德判断能力"
+          ],
+          "wisdom_insights": [
+            "友谊是人生最珍贵的财富",
+            "共同的理想让友谊更加深厚",
+            "承诺和誓言需要用心守护"
+          ],
+          "hints": [
+            "想想他们为什么选择结拜",
+            "什么让他们的友谊如此特别"
+          ],
+          "feedback": {
+            "correct": "太棒了！你理解了友谊的深层含义",
+            "incorrect": "再想想，什么让他们的友谊如此特别？"
+          }
         }
       ]
     },
@@ -214,11 +388,34 @@
       "tags": ["勇敢", "智慧", "冒险"],
       "difficulty_level": 1,
       "estimated_time": 300,
-      "learning_objectives": [
-        "理解勇敢和智慧的重要性",
-        "学习神话故事",
-        "掌握相关英文单词"
-      ],
+      "learning_objectives": {
+        "story": {
+          "经典故事": "理解孙悟空大闹天宫的神话故事情节",
+          "历史事件": "学习西游记的历史背景和神话传说",
+          "成语典故": "掌握'大闹天宫'成语的含义和用法",
+          "金句名言": "学习'路见不平，拔刀相助'等正义名言"
+        },
+        "thinking": {
+          "基础逻辑": "分析勇敢和智慧的关系（对比分析）",
+          "高级思维": "理解助人为乐的精神（道德推理）",
+          "专业视角": "从神话角度分析英雄品质（文学思维）",
+          "应用思维": "培养创新思维和解决问题的能力（创新思维）"
+        },
+        "learning": {
+          "英文学习": {
+            "词汇掌握": "掌握monkey, clever, strong, fly, clouds, magic等核心词汇",
+            "语法理解": "学习能力描述和性格特征的英语表达",
+            "语言运用": "能够用英语描述英雄品质和能力",
+            "文化交流": "理解中英文化中英雄形象的差异"
+          },
+          "智慧学习": {
+            "人生哲理": "理解勇敢和智慧的重要性",
+            "价值观念": "学习助人为乐和正义感",
+            "情感智慧": "培养面对困难时的勇气和智慧",
+            "成长智慧": "学会用能力帮助需要帮助的人"
+          }
+        }
+      },
       "content": {
         "text": "The monkey king was very clever and strong. He could fly through the clouds and fight with magic. One day, he met a monk who needed help. The monkey king decided to protect the monk on a long journey."
       },
@@ -390,6 +587,56 @@
             "correct": "正确！你理解了助人为乐的道理",
             "incorrect": "再想想，和尚最需要什么帮助"
           }
+        },
+        {
+          "id": "q_002_wisdom",
+          "type": "moral_reasoning",
+          "difficulty": 1,
+          "interaction_type": "wisdom_reflection",
+          "question": {
+            "text": "从孙悟空帮助和尚的故事中，你学到了什么人生智慧？"
+          },
+          "options": [
+            {
+              "id": "opt_1",
+              "text": "真正的强者会用自己的能力帮助需要帮助的人"
+            },
+            {
+              "id": "opt_2", 
+              "text": "只有帮助别人才能获得回报"
+            },
+            {
+              "id": "opt_3",
+              "text": "帮助别人是为了显示自己的强大"
+            },
+            {
+              "id": "opt_4",
+              "text": "只有朋友才值得帮助"
+            }
+          ],
+          "correct_answer": "opt_1",
+          "explanation": {
+            "text": "孙悟空的故事告诉我们，真正的强者不是用力量欺负别人，而是用能力保护需要帮助的人，这是真正的英雄品质"
+          },
+          "related_words": ["word_007", "word_008", "word_009"],
+          "learning_points": [
+            "理解助人为乐的精神",
+            "学习英雄品质",
+            "培养正义感和同情心"
+          ],
+          "wisdom_insights": [
+            "真正的力量来自善良的心",
+            "帮助别人是最大的快乐",
+            "正义感是英雄的必备品质"
+          ],
+          "hints": [
+            "想想孙悟空为什么要帮助和尚",
+            "什么让孙悟空成为真正的英雄"
+          ],
+          "feedback": {
+            "correct": "太棒了！你理解了英雄的真正含义",
+            "incorrect": "再想想，什么让孙悟空成为真正的英雄？"
+          }
         }
       ]
     },
@@ -402,11 +649,34 @@
       "tags": ["坚持", "谦虚", "智慧"],
       "difficulty_level": 1,
       "estimated_time": 300,
-      "learning_objectives": [
-        "理解坚持的重要性",
-        "学习成语故事",
-        "掌握相关英文单词"
-      ],
+      "learning_objectives": {
+        "story": {
+          "经典故事": "理解龟兔赛跑的成语故事情节",
+          "历史事件": "学习成语故事的历史背景和文化传承",
+          "成语典故": "掌握'龟兔赛跑'成语的含义和用法",
+          "金句名言": "学习'慢而稳者胜'等智慧名言"
+        },
+        "thinking": {
+          "基础逻辑": "分析速度与坚持的关系（对比分析）",
+          "高级思维": "理解骄傲和谦虚的对比（辩证思维）",
+          "专业视角": "从心理学角度分析性格特点（心理思维）",
+          "应用思维": "培养坚持不懈的品质（坚持思维）"
+        },
+        "learning": {
+          "英文学习": {
+            "词汇掌握": "掌握hare, tortoise, race, fast, confident, steady等核心词汇",
+            "语法理解": "学习性格特征和对比的英语表达",
+            "语言运用": "能够用英语描述性格特点和比赛过程",
+            "文化交流": "理解中英文化中成语和谚语的差异"
+          },
+          "智慧学习": {
+            "人生哲理": "理解坚持和谦虚的重要性",
+            "价值观念": "学习不骄不躁的品质",
+            "情感智慧": "培养持之以恒的精神",
+            "成长智慧": "学会在竞争中保持正确的心态"
+          }
+        }
+      },
       "content": {
         "text": "A hare and a tortoise decided to have a race. The hare was very fast and confident. The tortoise was slow but steady. During the race, the hare took a nap because he thought he would win easily. But the tortoise kept moving and won the race!"
       },
@@ -578,6 +848,56 @@
             "correct": "正确！你理解了故事的道理",
             "incorrect": "再想想，谁赢了比赛，为什么"
           }
+        },
+        {
+          "id": "q_003_wisdom",
+          "type": "moral_reasoning",
+          "difficulty": 1,
+          "interaction_type": "wisdom_reflection",
+          "question": {
+            "text": "从龟兔赛跑的故事中，你学到了什么人生智慧？"
+          },
+          "options": [
+            {
+              "id": "opt_1",
+              "text": "坚持和努力比天赋更重要"
+            },
+            {
+              "id": "opt_2", 
+              "text": "速度快的总是会赢"
+            },
+            {
+              "id": "opt_3",
+              "text": "比赛时应该休息一下"
+            },
+            {
+              "id": "opt_4",
+              "text": "乌龟比兔子聪明"
+            }
+          ],
+          "correct_answer": "opt_1",
+          "explanation": {
+            "text": "龟兔赛跑告诉我们，天赋固然重要，但坚持和努力更重要。真正的成功来自于持之以恒的努力，而不是一时的优势"
+          },
+          "related_words": ["word_015", "word_017", "word_018"],
+          "learning_points": [
+            "理解坚持的重要性",
+            "学习谦虚的品质",
+            "培养持之以恒的精神"
+          ],
+          "wisdom_insights": [
+            "坚持是成功的关键",
+            "谦虚使人进步",
+            "努力比天赋更重要"
+          ],
+          "hints": [
+            "想想为什么乌龟能赢",
+            "什么品质让乌龟成功"
+          ],
+          "feedback": {
+            "correct": "太棒了！你理解了坚持的真正价值",
+            "incorrect": "再想想，什么让乌龟最终获胜？"
+          }
         }
       ]
     }
@@ -614,6 +934,30 @@
       "suitable_for": ["logical_connectors", "cause_effect", "conditional_logic"],
       "ui_components": ["text_input", "dropdown_selection"],
       "validation": "text_completion"
+    },
+    "story_analysis": {
+      "name": "故事分析",
+      "description": "深入分析故事内容和主题",
+      "usage_percentage": 10,
+      "suitable_for": ["cultural_understanding", "story_comprehension", "theme_analysis"],
+      "ui_components": ["story_timeline", "character_analysis", "theme_mapping"],
+      "validation": "comprehensive_analysis"
+    },
+    "wisdom_reflection": {
+      "name": "智慧反思",
+      "description": "从故事中提取人生智慧和价值观",
+      "usage_percentage": 15,
+      "suitable_for": ["moral_reasoning", "value_education", "life_wisdom"],
+      "ui_components": ["wisdom_cards", "reflection_questions", "value_discussion"],
+      "validation": "wisdom_insights"
+    },
+    "creative_thinking": {
+      "name": "创造性思维",
+      "description": "基于故事内容进行创造性思考和表达",
+      "usage_percentage": 10,
+      "suitable_for": ["creative_thinking", "imagination", "story_creation"],
+      "ui_components": ["story_continuation", "character_creation", "alternative_endings"],
+      "validation": "creativity_assessment"
     }
   },
   "logic_types": {
@@ -718,6 +1062,74 @@
         "识别模式"
       ],
       "suitable_interactions": ["click_select", "drag_sort"]
+    },
+    "critical_thinking": {
+      "name": "批判性思维",
+      "english_name": "Critical Thinking",
+      "description": "分析、评估和判断信息",
+      "difficulty_levels": [2, 3, 4],
+      "learning_objectives": [
+        "分析信息的可靠性",
+        "评估不同观点",
+        "形成独立判断"
+      ],
+      "example_questions": [
+        "这个观点有什么问题？",
+        "你同意这个说法吗？为什么？",
+        "如何改进这个想法？"
+      ],
+      "suitable_interactions": ["wisdom_reflection", "story_analysis"]
+    },
+    "creative_thinking": {
+      "name": "创造性思维",
+      "english_name": "Creative Thinking",
+      "description": "产生新想法和解决方案",
+      "difficulty_levels": [2, 3, 4],
+      "learning_objectives": [
+        "产生创新想法",
+        "寻找多种解决方案",
+        "发挥想象力"
+      ],
+      "example_questions": [
+        "如果你是故事中的角色，你会怎么做？",
+        "你能想到故事的另一种结局吗？",
+        "如何用不同的方式解决这个问题？"
+      ],
+      "suitable_interactions": ["creative_thinking", "story_analysis"]
+    },
+    "moral_reasoning": {
+      "name": "道德推理",
+      "english_name": "Moral Reasoning",
+      "description": "理解和应用道德原则",
+      "difficulty_levels": [1, 2, 3],
+      "learning_objectives": [
+        "理解道德原则",
+        "判断行为的对错",
+        "培养正确的价值观"
+      ],
+      "example_questions": [
+        "这样做对吗？为什么？",
+        "什么是正确的选择？",
+        "你从中学到了什么道理？"
+      ],
+      "suitable_interactions": ["wisdom_reflection", "click_select"]
+    },
+    "cultural_understanding": {
+      "name": "文化理解",
+      "english_name": "Cultural Understanding",
+      "description": "理解和尊重不同文化",
+      "difficulty_levels": [1, 2, 3],
+      "learning_objectives": [
+        "理解文化背景",
+        "尊重文化差异",
+        "培养文化素养"
+      ],
+      "example_questions": [
+        "这个故事反映了什么文化？",
+        "不同文化有什么相似之处？",
+        "如何尊重不同的文化？"
+      ],
+      "suitable_interactions": ["story_analysis", "wisdom_reflection"]
     }
   }
 }
