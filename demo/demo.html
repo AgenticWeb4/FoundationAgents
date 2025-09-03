@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logic Word Learning Master - Three Kingdoms Edition</title>
+    <title>逻辑单词学习大师 - 现代版</title>
     <style>
         * {
             margin: 0;
@@ -12,32 +12,34 @@
         }
 
         body {
-            font-family: 'Comic Sans MS', 'Arial', sans-serif;
-            background: linear-gradient(135deg, #87CEEB 0%, #98FB98 50%, #FFB6C1 100%);
+            font-family: 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #011A4C 0%, #1A2B5C 100%);
             min-height: 100vh;
-            color: #333;
-            font-weight: 600;
+            color: #ffffff;
             overflow-x: hidden;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 414px;
             margin: 0 auto;
             padding: 20px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         .page {
             display: none;
-            background: #FFFFFF;
-            border: 6px solid #FF6B6B;
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
             padding: 30px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .page.active {
@@ -63,22 +65,22 @@
         }
 
         .title {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
-            color: #FF6B6B;
+            color: #ffffff;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
         .subtitle {
-            font-size: 1.3rem;
-            color: #4ECDC4;
-            font-weight: 600;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
             margin-bottom: 20px;
-            background: #FFF9C4;
-            padding: 8px 15px;
-            border-radius: 15px;
-            border: 3px solid #FFD93D;
+            background: rgba(142, 151, 252, 0.2);
+            padding: 12px 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(142, 151, 252, 0.3);
         }
 
         .chinese-hint {
@@ -100,19 +102,18 @@
 
         .progress-bar {
             width: 100%;
-            height: 15px;
-            background: #E0E0E0;
-            border-radius: 10px;
-            border: 3px solid #FF6B6B;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
             margin-bottom: 30px;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #4ECDC4 0%, #44A08D 100%);
+            background: linear-gradient(90deg, #8E97FC 0%, #A8B2FF 100%);
             transition: width 0.5s ease;
-            border-radius: 7px;
+            border-radius: 4px;
         }
 
         .content {
@@ -122,47 +123,51 @@
         }
 
         .story-scene {
-            background: linear-gradient(135deg, #FFF9C4 0%, #FFE0B2 100%);
-            border: 4px solid #FFD93D;
+            background: rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             padding: 25px;
             margin-bottom: 30px;
             position: relative;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .scene-title {
-            font-size: 1.8rem;
-            color: #FF6B6B;
+            font-size: 1.5rem;
+            color: #ffffff;
             margin-bottom: 15px;
             text-align: center;
-            font-weight: 700;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
         .scene-description {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             line-height: 1.6;
-            color: #000000;
+            color: rgba(255, 255, 255, 0.9);
             margin-bottom: 20px;
             text-align: justify;
-            font-weight: 700;
+            font-weight: 400;
         }
 
         .word-highlight {
-            background: #FFFF00;
+            background: rgba(142, 151, 252, 0.3);
             padding: 4px 8px;
-            font-weight: 900;
-            color: #000000;
+            font-weight: 600;
+            color: #ffffff;
             margin: 0 2px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            border: 2px solid #000000;
+            transition: all 0.3s ease;
+            border-radius: 6px;
+            border: 1px solid rgba(142, 151, 252, 0.5);
         }
 
         .word-highlight:hover {
-            background: #FF0000;
-            color: #FFFFFF;
+            background: rgba(142, 151, 252, 0.6);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(142, 151, 252, 0.3);
         }
 
         .word-tooltip {
@@ -413,68 +418,72 @@
         }
 
         .answer-option {
-            background: #FFFFFF;
-            border: 4px solid #FF6B6B;
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
             padding: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: center;
-            font-weight: 600;
-            font-size: 1.2rem;
-            color: #FF6B6B;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            font-weight: 500;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
         }
 
         .answer-option:hover {
-            background: #FFE0B2;
-            border-color: #FF8C00;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
         }
 
         .answer-option.selected {
-            background: #FF6B6B;
+            background: rgba(142, 151, 252, 0.6);
             color: #FFFFFF;
-            border-color: #FF6B6B;
-            transform: scale(1.05);
+            border-color: rgba(142, 151, 252, 0.8);
+            transform: scale(1.02);
         }
 
         .answer-option.correct {
-            background: #4ECDC4;
+            background: rgba(76, 175, 80, 0.6);
             color: #FFFFFF;
-            border-color: #4ECDC4;
-            transform: scale(1.05);
+            border-color: rgba(76, 175, 80, 0.8);
+            transform: scale(1.02);
         }
 
         .answer-option.wrong {
-            background: #FF6B6B;
+            background: rgba(244, 67, 54, 0.6);
             color: #FFFFFF;
-            border-color: #FF6B6B;
-            transform: scale(0.95);
+            border-color: rgba(244, 67, 54, 0.8);
+            transform: scale(0.98);
         }
 
         .feedback {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
             padding: 20px;
             margin-bottom: 25px;
             text-align: center;
-            font-size: 1.1rem;
-            font-weight: bold;
+            font-size: 1rem;
+            font-weight: 500;
             display: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .feedback.correct {
-            background: rgba(34, 139, 34, 0.1);
-            color: #228B22;
-            border: 2px solid #228B22;
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            border: 1px solid rgba(76, 175, 80, 0.4);
         }
 
         .feedback.wrong {
-            background: rgba(220, 20, 60, 0.1);
-            color: #DC143C;
-            border: 2px solid #DC143C;
+            background: rgba(244, 67, 54, 0.2);
+            color: #F44336;
+            border: 1px solid rgba(244, 67, 54, 0.4);
         }
 
         .navigation {
@@ -485,24 +494,23 @@
         }
 
         .btn {
-            background: #FF6B6B;
+            background: rgba(142, 151, 252, 0.8);
             color: #FFFFFF;
-            border: 4px solid #FF6B6B;
-            border-radius: 15px;
+            border: 1px solid rgba(142, 151, 252, 0.5);
+            border-radius: 16px;
             padding: 15px 30px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-family: 'Comic Sans MS', 'Arial', sans-serif;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            font-family: 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            box-shadow: 0 4px 16px rgba(142, 151, 252, 0.3);
         }
 
         .btn:hover {
-            background: #FF8C00;
-            border-color: #FF8C00;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(142, 151, 252, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(142, 151, 252, 0.4);
         }
 
         .btn:disabled {
@@ -536,42 +544,45 @@
 
         .stat-item {
             text-align: center;
-            background: linear-gradient(135deg, #FFF9C4 0%, #FFE0B2 100%);
+            background: rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
             padding: 20px;
             margin: 10px;
             min-width: 120px;
-            border: 4px solid #FFD93D;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .stat-number {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            color: #FF6B6B;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            color: #ffffff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
         .stat-label {
-            font-size: 1.2rem;
-            color: #4ECDC4;
-            font-weight: 600;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
             margin-top: 5px;
         }
 
         .character {
             position: absolute;
-            width: 80px;
-            height: 80px;
-            background: #DAA520;
+            width: 60px;
+            height: 60px;
+            background: rgba(142, 151, 252, 0.8);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            color: #8B0000;
+            font-size: 1.5rem;
+            color: #ffffff;
             font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 16px rgba(142, 151, 252, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .character.top-right {
@@ -582,6 +593,74 @@
         .character.bottom-left {
             bottom: 20px;
             left: 20px;
+        }
+
+        /* 装饰性元素 */
+        .decorative-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        .shape-1 {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #E7C46C, #F4D03F);
+            top: 10%;
+            right: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(45deg, #7FB069, #8FBC8F);
+            top: 20%;
+            left: 15%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        .shape-3 {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #E67E22, #F39C12);
+            bottom: 20%;
+            left: 10%;
+            animation: float 7s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page {
+            animation: fadeInUp 0.6s ease-out;
         }
 
         @media (max-width: 768px) {
@@ -614,12 +693,19 @@
 </head>
 <body>
     <div class="container">
+        <!-- 装饰性元素 -->
+        <div class="decorative-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+
         <!-- 页面1: 欢迎页面 -->
         <div class="page active" id="page1">
             <div class="character top-right">故</div>
             <div class="header">
-                <h1 class="title">Story Learning Mode</h1>
-                <p class="subtitle">Story → Word Puzzle → Logic Questions</p>
+                <h1 class="title">Logic Word Learning Master</h1>
+                <p class="subtitle">English Words · Logic Thinking · Story Learning</p>
                 <div class="progress-bar">
                     <div class="progress-fill" style="width: 20%"></div>
                 </div>
@@ -627,13 +713,13 @@
             
             <div class="content">
                 <div class="story-scene">
-                    <h2 class="scene-title">Learning Strategy: Story First</h2>
+                    <h2 class="scene-title">Learning Strategy: Story-First Approach</h2>
                     <p class="scene-description">
-                        This version uses a <span class="word-highlight">story</span><span class="chinese-hint">(故事)</span>-first learning approach:
-                        <br><strong>Step 1:</strong> Read an <span class="word-highlight">interesting</span><span class="chinese-hint">(有趣的)</span> story (Three Kingdoms, Journey to the West, or Chinese idioms)
-                        <br><strong>Step 2:</strong> Play <span class="word-highlight">word</span><span class="chinese-hint">(单词)</span> puzzles to learn English words
-                        <br><strong>Step 3:</strong> Answer <span class="word-highlight">logic</span><span class="chinese-hint">(逻辑)</span> questions to think deeper
-                        <br><br>Perfect for learners who love <span class="word-highlight">stories</span><span class="chinese-hint">(故事)</span> and puzzles!
+                        This version uses a <span class="word-highlight">story</span>-first learning method:
+                        <br><strong>Step 1:</strong> Read <span class="word-highlight">interesting</span> stories (Three Kingdoms, Journey to the West, Chinese idioms)
+                        <br><strong>Step 2:</strong> Learn English <span class="word-highlight">words</span> through story context
+                        <br><strong>Step 3:</strong> Answer <span class="word-highlight">logic</span> questions to think deeper
+                        <br><br>Perfect for learners who love <span class="word-highlight">stories</span> and logical thinking!
                     </p>
                 </div>
                 
@@ -644,7 +730,7 @@
                     </div>
                     <div class="stat-item">
                         <div class="stat-number">2</div>
-                        <div class="stat-label">Questions per Page</div>
+                        <div class="stat-label">Logic Questions</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number">5</div>
@@ -674,17 +760,17 @@
                 <div class="story-scene">
                     <h2 class="scene-title">The Story of Three Brothers</h2>
                     <p class="scene-description">
-                        In the <span class="word-highlight" onclick="playPronunciation('peach')">peach</span><span class="chinese-hint">(桃子)</span> <span class="pronunciation">/piːtʃ/</span> <span class="word-highlight" onclick="playPronunciation('garden')">garden</span><span class="chinese-hint">(花园)</span> <span class="pronunciation">/ˈɡɑːrdən/</span>, three <span class="word-highlight" onclick="playPronunciation('brothers')">brothers</span><span class="chinese-hint">(兄弟)</span> <span class="pronunciation">/ˈbrʌðərz/</span> met for the first time.
-                        Liu Bei, Guan Yu, and Zhang Fei became <span class="word-highlight" onclick="playPronunciation('friends')">friends</span><span class="chinese-hint">(朋友)</span> <span class="pronunciation">/frendz/</span> and made a <span class="word-highlight" onclick="playPronunciation('promise')">promise</span><span class="chinese-hint">(承诺)</span> <span class="pronunciation">/ˈprɑːmɪs/</span>.
-                        They <span class="word-highlight" onclick="playPronunciation('swore')">swore</span><span class="chinese-hint">(发誓)</span> <span class="pronunciation">/swɔːr/</span> to <span class="word-highlight" onclick="playPronunciation('work')">work</span><span class="chinese-hint">(工作)</span> <span class="pronunciation">/wɜːrk/</span> <span class="word-highlight" onclick="playPronunciation('together')">together</span><span class="chinese-hint">(一起)</span> <span class="pronunciation">/təˈɡeðər/</span> to <span class="word-highlight" onclick="playPronunciation('save')">save</span><span class="chinese-hint">(拯救)</span> <span class="pronunciation">/seɪv/</span> the <span class="word-highlight" onclick="playPronunciation('world')">world</span><span class="chinese-hint">(世界)</span> <span class="pronunciation">/wɜːrld/</span>.
-                        This <span class="word-highlight" onclick="playPronunciation('decision')">decision</span><span class="chinese-hint">(决定)</span> <span class="pronunciation">/dɪˈsɪʒən/</span> <span class="word-highlight" onclick="playPronunciation('changed')">changed</span><span class="chinese-hint">(改变)</span> <span class="pronunciation">/tʃeɪndʒd/</span> their <span class="word-highlight" onclick="playPronunciation('lives')">lives</span><span class="chinese-hint">(生活)</span> <span class="pronunciation">/laɪvz/</span> and <span class="word-highlight" onclick="playPronunciation('history')">history</span><span class="chinese-hint">(历史)</span> <span class="pronunciation">/ˈhɪstəri/</span> forever.
+                        In the <span class="word-highlight" onclick="playPronunciation('peach')">peach</span> <span class="pronunciation">/piːtʃ/</span> <span class="word-highlight" onclick="playPronunciation('garden')">garden</span> <span class="pronunciation">/ˈɡɑːrdən/</span>, three <span class="word-highlight" onclick="playPronunciation('brothers')">brothers</span> <span class="pronunciation">/ˈbrʌðərz/</span> met for the first time.
+                        Liu Bei, Guan Yu, and Zhang Fei became <span class="word-highlight" onclick="playPronunciation('friends')">friends</span> <span class="pronunciation">/frendz/</span> and made a <span class="word-highlight" onclick="playPronunciation('promise')">promise</span> <span class="pronunciation">/ˈprɑːmɪs/</span>.
+                        They <span class="word-highlight" onclick="playPronunciation('swore')">swore</span> <span class="pronunciation">/swɔːr/</span> to <span class="word-highlight" onclick="playPronunciation('work')">work</span> <span class="pronunciation">/wɜːrk/</span> <span class="word-highlight" onclick="playPronunciation('together')">together</span> <span class="pronunciation">/təˈɡeðər/</span> to <span class="word-highlight" onclick="playPronunciation('save')">save</span> <span class="pronunciation">/seɪv/</span> the <span class="word-highlight" onclick="playPronunciation('world')">world</span> <span class="pronunciation">/wɜːrld/</span>.
+                        This <span class="word-highlight" onclick="playPronunciation('decision')">decision</span> <span class="pronunciation">/dɪˈsɪʒən/</span> <span class="word-highlight" onclick="playPronunciation('changed')">changed</span> <span class="pronunciation">/tʃeɪndʒd/</span> their <span class="word-highlight" onclick="playPronunciation('lives')">lives</span> <span class="pronunciation">/laɪvz/</span> and <span class="word-highlight" onclick="playPronunciation('history')">history</span> <span class="pronunciation">/ˈhɪstəri/</span> forever.
                     </p>
                 </div>
                 
 
                 
                 <div class="logic-question">
-                    <h3 class="question-title">Logic Question 1: Why and What Happens</h3>
+                    <h3 class="question-title">Logic Question 1: Cause and Effect</h3>
                     <p class="question-text">Why did the three brothers become friends?</p>
                     <div class="answer-options">
                         <div class="answer-option" onclick="selectAnswer(this, 'correct')">
@@ -704,7 +790,7 @@
                 </div>
                 
                 <div class="logic-question">
-                    <h3 class="question-title">Logic Question 2: Story Sequence</h3>
+                    <h3 class="question-title">Logic Question 2: Time Sequence</h3>
                     <p class="question-text">What happened first in the story?</p>
                     <div class="answer-options">
                         <div class="answer-option" onclick="selectAnswer(this, 'correct')">
@@ -745,10 +831,10 @@
                 <div class="story-scene">
                     <h2 class="scene-title">The Story of Monkey King</h2>
                     <p class="scene-description">
-                        The <span class="word-highlight" onclick="playPronunciation('monkey')">monkey</span><span class="chinese-hint">(猴子)</span> <span class="pronunciation">/ˈmʌŋki/</span> king was very <span class="word-highlight" onclick="playPronunciation('clever')">clever</span><span class="chinese-hint">(聪明的)</span> <span class="pronunciation">/ˈklevər/</span> and <span class="word-highlight" onclick="playPronunciation('strong')">strong</span><span class="chinese-hint">(强壮的)</span> <span class="pronunciation">/strɔːŋ/</span>.
-                        He could <span class="word-highlight" onclick="playPronunciation('fly')">fly</span><span class="chinese-hint">(飞)</span> <span class="pronunciation">/flaɪ/</span> through the <span class="word-highlight" onclick="playPronunciation('clouds')">clouds</span><span class="chinese-hint">(云)</span> <span class="pronunciation">/klaʊdz/</span> and <span class="word-highlight" onclick="playPronunciation('fight')">fight</span><span class="chinese-hint">(战斗)</span> <span class="pronunciation">/faɪt/</span> with <span class="word-highlight" onclick="playPronunciation('magic')">magic</span><span class="chinese-hint">(魔法)</span> <span class="pronunciation">/ˈmædʒɪk/</span>.
-                        One day, he met a <span class="word-highlight" onclick="playPronunciation('monk')">monk</span><span class="chinese-hint">(和尚)</span> <span class="pronunciation">/mʌŋk/</span> who needed <span class="word-highlight" onclick="playPronunciation('help')">help</span><span class="chinese-hint">(帮助)</span> <span class="pronunciation">/help/</span>.
-                        The monkey king decided to <span class="word-highlight" onclick="playPronunciation('protect')">protect</span><span class="chinese-hint">(保护)</span> <span class="pronunciation">/prəˈtekt/</span> the monk on a long <span class="word-highlight" onclick="playPronunciation('journey')">journey</span><span class="chinese-hint">(旅程)</span> <span class="pronunciation">/ˈdʒɜːrni/</span>.
+                        The <span class="word-highlight" onclick="playPronunciation('monkey')">monkey</span> <span class="pronunciation">/ˈmʌŋki/</span> king was very <span class="word-highlight" onclick="playPronunciation('clever')">clever</span> <span class="pronunciation">/ˈklevər/</span> and <span class="word-highlight" onclick="playPronunciation('strong')">strong</span> <span class="pronunciation">/strɔːŋ/</span>.
+                        He could <span class="word-highlight" onclick="playPronunciation('fly')">fly</span> <span class="pronunciation">/flaɪ/</span> through the <span class="word-highlight" onclick="playPronunciation('clouds')">clouds</span> <span class="pronunciation">/klaʊdz/</span> and <span class="word-highlight" onclick="playPronunciation('fight')">fight</span> <span class="pronunciation">/faɪt/</span> with <span class="word-highlight" onclick="playPronunciation('magic')">magic</span> <span class="pronunciation">/ˈmædʒɪk/</span>.
+                        One day, he met a <span class="word-highlight" onclick="playPronunciation('monk')">monk</span> <span class="pronunciation">/mʌŋk/</span> who needed <span class="word-highlight" onclick="playPronunciation('help')">help</span> <span class="pronunciation">/help/</span>.
+                        The monkey king decided to <span class="word-highlight" onclick="playPronunciation('protect')">protect</span> <span class="pronunciation">/prəˈtekt/</span> the monk on a long <span class="word-highlight" onclick="playPronunciation('journey')">journey</span> <span class="pronunciation">/ˈdʒɜːrni/</span>.
                     </p>
                 </div>
                 
@@ -816,11 +902,11 @@
                 <div class="story-scene">
                     <h2 class="scene-title">The Story of Slow and Steady</h2>
                     <p class="scene-description">
-                        A <span class="word-highlight" onclick="playPronunciation('hare')">hare</span><span class="chinese-hint">(兔子)</span> <span class="pronunciation">/her/</span> and a <span class="word-highlight" onclick="playPronunciation('tortoise')">tortoise</span><span class="chinese-hint">(乌龟)</span> <span class="pronunciation">/ˈtɔːrtəs/</span> decided to have a <span class="word-highlight" onclick="playPronunciation('race')">race</span><span class="chinese-hint">(比赛)</span> <span class="pronunciation">/reɪs/</span>.
-                        The hare was very <span class="word-highlight" onclick="playPronunciation('fast')">fast</span><span class="chinese-hint">(快的)</span> <span class="pronunciation">/fæst/</span> and <span class="word-highlight" onclick="playPronunciation('confident')">confident</span><span class="chinese-hint">(自信的)</span> <span class="pronunciation">/ˈkɑːnfɪdənt/</span>.
-                        The tortoise was <span class="word-highlight" onclick="playPronunciation('slow')">slow</span><span class="chinese-hint">(慢的)</span> <span class="pronunciation">/sloʊ/</span> but <span class="word-highlight" onclick="playPronunciation('steady')">steady</span><span class="chinese-hint">(稳定的)</span> <span class="pronunciation">/ˈstedi/</span>.
-                        During the race, the hare took a <span class="word-highlight" onclick="playPronunciation('nap')">nap</span><span class="chinese-hint">(小睡)</span> <span class="pronunciation">/næp/</span> because he thought he would <span class="word-highlight" onclick="playPronunciation('win')">win</span><span class="chinese-hint">(赢)</span> <span class="pronunciation">/wɪn/</span> easily.
-                        But the tortoise kept <span class="word-highlight" onclick="playPronunciation('moving')">moving</span><span class="chinese-hint">(移动)</span> <span class="pronunciation">/ˈmuːvɪŋ/</span> and won the race!
+                        A <span class="word-highlight" onclick="playPronunciation('hare')">hare</span> <span class="pronunciation">/her/</span> and a <span class="word-highlight" onclick="playPronunciation('tortoise')">tortoise</span> <span class="pronunciation">/ˈtɔːrtəs/</span> decided to have a <span class="word-highlight" onclick="playPronunciation('race')">race</span> <span class="pronunciation">/reɪs/</span>.
+                        The hare was very <span class="word-highlight" onclick="playPronunciation('fast')">fast</span> <span class="pronunciation">/fæst/</span> and <span class="word-highlight" onclick="playPronunciation('confident')">confident</span> <span class="pronunciation">/ˈkɑːnfɪdənt/</span>.
+                        The tortoise was <span class="word-highlight" onclick="playPronunciation('slow')">slow</span> <span class="pronunciation">/sloʊ/</span> but <span class="word-highlight" onclick="playPronunciation('steady')">steady</span> <span class="pronunciation">/ˈstedi/</span>.
+                        During the race, the hare took a <span class="word-highlight" onclick="playPronunciation('nap')">nap</span> <span class="pronunciation">/næp/</span> because he thought he would <span class="word-highlight" onclick="playPronunciation('win')">win</span> <span class="pronunciation">/wɪn/</span> easily.
+                        But the tortoise kept <span class="word-highlight" onclick="playPronunciation('moving')">moving</span> <span class="pronunciation">/ˈmuːvɪŋ/</span> and won the race!
                     </p>
                 </div>
                 
@@ -888,11 +974,11 @@
                 <div class="story-scene">
                     <h2 class="scene-title">Learning Achievement Summary</h2>
                     <p class="scene-description">
-                        You have successfully completed the <span class="word-highlight">story</span><span class="chinese-hint">(故事)</span>-first learning approach!
+                        You have successfully completed the <span class="word-highlight">story</span>-first learning approach!
                         <br><strong>Story 1:</strong> Three Kingdoms - The Peach Garden Oath (6 words + 2 logic questions)
                         <br><strong>Story 2:</strong> Journey to the West - Monkey King's Adventure (6 words + 2 logic questions)
                         <br><strong>Story 3:</strong> Chinese Idiom - The Tortoise and the Hare (6 words + 2 logic questions)
-                        <br><br>You learned <span class="word-highlight">18</span><span class="chinese-hint">(18)</span> English words and answered <span class="word-highlight">6</span><span class="chinese-hint">(6)</span> logic questions!
+                        <br><br>You learned <span class="word-highlight">18</span> English words and answered <span class="word-highlight">6</span> logic questions!
                     </p>
                 </div>
                 
@@ -920,16 +1006,16 @@
                     <p class="question-text">What did you learn about the story-first learning method?</p>
                     <div class="answer-options">
                         <div class="answer-option" onclick="selectAnswer(this, 'correct')">
-                            A. Stories make learning more interesting (故事让学习更有趣)
+                            A. Stories make learning more interesting
                         </div>
                         <div class="answer-option" onclick="selectAnswer(this, 'correct')">
-                            B. Word puzzles help remember words better (单词拼图帮助更好地记住单词)
+                            B. Word puzzles help remember words better
                         </div>
                         <div class="answer-option" onclick="selectAnswer(this, 'correct')">
-                            C. Logic questions help think deeper (逻辑问题帮助更深层思考)
+                            C. Logic questions help think deeper
                         </div>
                         <div class="answer-option" onclick="selectAnswer(this, 'correct')">
-                            D. This method is perfect for story lovers (这种方法对喜欢故事的人很完美)
+                            D. This method is perfect for story lovers
                         </div>
                     </div>
                 </div>
@@ -1002,11 +1088,11 @@
             // 显示结果
             if (result === 'correct') {
                 element.classList.add('correct');
-                showFeedback(element.parentElement.nextElementSibling, '恭喜！回答正确！', 'correct');
+                showFeedback(element.parentElement.nextElementSibling, '🎉 Correct! Well done!', 'correct');
                 correctAnswers++;
             } else {
                 element.classList.add('wrong');
-                showFeedback(element.parentElement.nextElementSibling, '再想想看，答案不正确。', 'wrong');
+                showFeedback(element.parentElement.nextElementSibling, '🤔 Think again, that\'s not correct.', 'wrong');
             }
             
             totalQuestions++;
